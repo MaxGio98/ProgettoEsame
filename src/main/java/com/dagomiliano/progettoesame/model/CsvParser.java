@@ -2,6 +2,7 @@ package com.dagomiliano.progettoesame.model;
 
 import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -18,7 +19,7 @@ public class CsvParser{
     private String ftpUrl;
     URL url;
 
-    CsvParser(String url) {
+    public CsvParser(String url) {
         this.ftpUrl = url;
     }
 
@@ -35,6 +36,8 @@ public class CsvParser{
                 entry = zis.getNextEntry();
             }
         } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
