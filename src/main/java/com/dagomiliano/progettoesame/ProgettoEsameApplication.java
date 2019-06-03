@@ -14,6 +14,7 @@ public class ProgettoEsameApplication {
 
 		CsvParser p = new CsvParser("http://dati.emilia-romagna.it/dataset/42063df0-49ed-438a-91d4-fca8074166c4/resource/f1c93219-63fa-4106-b397-987cc96db8cf/download/erosspa.zip");
 		p.Parse();
+
 	}
 
 }
