@@ -1,46 +1,68 @@
 package com.dagomiliano.progettoesame.model;
 
-import java.io.BufferedInputStream;
-import java.io.File;
+import net.minidev.json.JSONValue;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.boot.json.BasicJsonParser;
+
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
+import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-import java.util.zip.ZipInputStream;
+import java.net.URLConnection;
+import java.util.List;
+import java.util.Map;
+
 
 /**
  *Classe utilizzata per effettuare il parsing remoto dei dati
  */
 
-public class CsvParser{
+public class CsvParser {
 
-    private String ftpUrl;
-    URL url;
 
-    public CsvParser(String url) {
-        this.ftpUrl = url;
-    }
+    public void parse(String Url) {
 
-    public void Parse() throws MalformedURLException {
+        String url = Url;
         try {
-            this.url = new URL(this.ftpUrl);
-            //File zipFile = new File(this.url.toString());
-            //ZipFile zip = new ZipFile(zipFile);
-            InputStream in = this.url.openStream();
-            ZipInputStream zis = new ZipInputStream(in);
-            ZipEntry entry = zis.getNextEntry();
-            while (entry != null) {
-                System.out.println(entry.getName());
-                entry = zis.getNextEntry();
+
+            URLConnection openConnection = new URL(url).openConnection();
+            openConnection.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
+            InputStream in = openConnection.getInputStream();
+
+            String data = "";
+            String line;
+
+            try {
+                InputStreamReader inR = new InputStreamReader(in);
+                BufferedReader buf = new BufferedReader(inR);
+
+                while ((line = buf.readLine()) != null) {
+                    data += line;
+                    //System.out.println( line );
+                }
+            } finally {
+                in.close();
             }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+
+            Map<String, Object> map = new BasicJsonParser().parseMap(data);
+
+            map = (Map<String, Object>) map.get("result");
+            map = (Map) ((List) map.get("resources")).get(0);
+            String zipUrl = (String) map.get("url");
+            String format = (String) map.get("format");
+
+            System.out.println(zipUrl);
+            System.out.println(format);
+
+
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
     }
 
+    //end class
 }
