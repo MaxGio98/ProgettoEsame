@@ -1,18 +1,18 @@
 package com.dagomiliano.progettoesame.model;
 
-import net.minidev.json.JSONValue;
-import org.json.JSONArray;
-import org.json.JSONObject;
+
 import org.springframework.boot.json.BasicJsonParser;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipException;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
 
 
 /**
@@ -22,7 +22,7 @@ import java.util.Map;
 public class CsvParser {
 
 
-    public void parse(String Url) {
+    public String JSONparse(String Url) {
 
         String url = Url;
         try {
@@ -51,17 +51,48 @@ public class CsvParser {
             map = (Map<String, Object>) map.get("result");
             map = (Map) ((List) map.get("resources")).get(0);
             String zipUrl = (String) map.get("url");
-            String format = (String) map.get("format");
+            //String format = (String) map.get("format");
 
-            System.out.println(zipUrl);
-            System.out.println(format);
-
+            //System.out.println(zipUrl);
+            //System.out.println(format);
+            return zipUrl;
 
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
+    }
+
+    public void ZIPfinder(String url, String name)
+    {
+
+        try {
+            URL urlOBJ=new URL(url);
+            File zipFile = new File(url);
+            ZipFile zip = new ZipFile(zipFile);
+            InputStream in = new BufferedInputStream(urlOBJ.openStream(), 1024);
+            ZipInputStream zis = new ZipInputStream(in);
+            ZipEntry entry;
+            System.out.println("ciao");
+        }
+        catch(MalformedURLException e)
+        {
+            e.printStackTrace();
+        }
+        catch(ZipException e)
+        {
+            e.printStackTrace();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+
+
+
     }
 
     //end class
