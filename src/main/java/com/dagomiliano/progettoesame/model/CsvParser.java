@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -24,7 +25,7 @@ import java.util.zip.ZipInputStream;
 
 public class CsvParser {
 
-
+    private List<erossPaProvincia> lista=new ArrayList<erossPaProvincia>();
     public String JSONparse(String Url) {
 
         String url = Url;
@@ -119,35 +120,24 @@ public class CsvParser {
 
 
     public void CSVparse(String dati) {
-
         String meta, data="";
-
         Scanner scanner = new Scanner(dati);
         scanner.useDelimiter("\n");
-
         meta = scanner.next();
         while(scanner.hasNext()) {
             data += scanner.next();
         }
-
         data = data.replaceAll("%", "");
+        data=data.replaceAll(",",".");
         data = data.replace("2.008","2008");
-
         String[] metaSplitted = meta.split(";");
         String[] dataSplitted = data.split(";");
-
-        erossPaProvincia[] dataSt = new erossPaProvincia[10];
-
-        System.out.println("ciao" + dataSplitted[22] + "ciao di nuovo");
-
-        Object[] objData = new Object[dataSplitted.length];
-        for (int i = 0; i < dataSt.length; i++) {
-
-//            for (int c = i*22; c < 22*(i+1); c++) {
-//                objData[c] = dataSplitted[c];
-//            }
-
-            dataSt[i] = new erossPaProvincia(dataSplitted[])
+//        erossPaProvincia[] dataSt = new erossPaProvincia[10];
+//        Object[] objData = new Object[dataSplitted.length];
+        for(int i=0; i<dataSplitted.length;i+=23)
+        {
+            erossPaProvincia ePP=new erossPaProvincia(Integer.parseInt(dataSplitted[i]),dataSplitted[i+1],Integer.parseInt(dataSplitted[i+2]),Float.parseFloat(dataSplitted[i+3]),Float.parseFloat(dataSplitted[i+4]),Float.parseFloat(dataSplitted[i+5]),Float.parseFloat(dataSplitted[i+6]),Float.parseFloat(dataSplitted[i+7]),Float.parseFloat(dataSplitted[i+8]),Float.parseFloat(dataSplitted[i+9]),Float.parseFloat(dataSplitted[i+10]),Float.parseFloat(dataSplitted[i+11]),Float.parseFloat(dataSplitted[i+12]),Float.parseFloat(dataSplitted[i+13]),Float.parseFloat(dataSplitted[i+14]),Float.parseFloat(dataSplitted[i+15]),Float.parseFloat(dataSplitted[i+16]),Float.parseFloat(dataSplitted[i+17]),Float.parseFloat(dataSplitted[i+18]),Float.parseFloat(dataSplitted[i+19]),Float.parseFloat(dataSplitted[i+20]),Float.parseFloat(dataSplitted[i+21]),Float.parseFloat(dataSplitted[i+22]));
+            lista.add(ePP);
         }
 
     }
