@@ -9,6 +9,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
@@ -26,37 +27,27 @@ public class CsvParser {
 
         String url = Url;
         try {
-
             URLConnection openConnection = new URL(url).openConnection();
             openConnection.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
             InputStream in = openConnection.getInputStream();
-
             String data = "";
             String line;
-
             try {
                 InputStreamReader inR = new InputStreamReader(in);
                 BufferedReader buf = new BufferedReader(inR);
 
                 while ((line = buf.readLine()) != null) {
                     data += line;
-                    //System.out.println( line );
                 }
             } finally {
                 in.close();
             }
-
             Map<String, Object> map = new BasicJsonParser().parseMap(data);
-
             map = (Map<String, Object>) map.get("result");
             map = (Map) ((List) map.get("resources")).get(0);
             String zipUrl = (String) map.get("url");
-            //String format = (String) map.get("format");
-
-            //System.out.println(zipUrl);
-            //System.out.println(format);
+            in.close();
             return zipUrl;
-
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -68,21 +59,21 @@ public class CsvParser {
 
     public void ZIPfinder(String url, String name)
     {
-
         try {
-            URL urlOBJ=new URL(url);
-            File zipFile = new File(url);
-            ZipFile zip = new ZipFile(zipFile);
-            InputStream in = new BufferedInputStream(urlOBJ.openStream(), 1024);
+            URL urlOBJ = new URL(url);
+            InputStream in = urlOBJ.openStream();
             ZipInputStream zis = new ZipInputStream(in);
-            ZipEntry entry;
-            System.out.println("ciao");
+            ZipEntry entry = zis.getNextEntry();
+            while (!(entry.getName().equals(name)))
+            {
+                entry = zis.getNextEntry();
+            }
+            System.out.println(entry.getName());
+
+            in.close();
+            zis.close();
         }
         catch(MalformedURLException e)
-        {
-            e.printStackTrace();
-        }
-        catch(ZipException e)
         {
             e.printStackTrace();
         }
@@ -90,10 +81,9 @@ public class CsvParser {
         {
             e.printStackTrace();
         }
-
-
-
     }
+
+
 
     //end class
 }

@@ -15,10 +15,7 @@ public class ProgettoEsameApplication {
 
 		CsvParser p = new CsvParser();
 		String url=p.JSONparse("https://www.dati.gov.it/api/3/action/package_show?id=42063df0-49ed-438a-91d4-fca8074166c4");
-		System.out.println(url);
-		URL url1=new URL(url);
-
-		//p.ZIPfinder(url, "Eross");
+		p.ZIPfinder(url, "EROSS_PA/EROSS_PA_PROVINCIA.csv");
 
 	}
 
