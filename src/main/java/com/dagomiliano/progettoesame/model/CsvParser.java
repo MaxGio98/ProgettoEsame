@@ -102,7 +102,7 @@ public class CsvParser {
             String data="";
             String line;
             while((line = br.readLine()) != null) {
-                data += line + "\n";
+                data += line + ";" +"\n";
             }
             zipFile.close();
             return data;
@@ -119,18 +119,37 @@ public class CsvParser {
 
 
     public void CSVparse(String dati) {
+
         String meta, data="";
-        dati=dati.replaceAll("%", "");
-        dati=dati.replace("2.008","2008");
-        System.out.println(dati);
+
         Scanner scanner = new Scanner(dati);
         scanner.useDelimiter("\n");
+
         meta = scanner.next();
         while(scanner.hasNext()) {
             data += scanner.next();
         }
+
+        data = data.replaceAll("%", "");
+        data = data.replace("2.008","2008");
+
         String[] metaSplitted = meta.split(";");
         String[] dataSplitted = data.split(";");
+
+        erossPaProvincia[] dataSt = new erossPaProvincia[10];
+
+        System.out.println("ciao" + dataSplitted[22] + "ciao di nuovo");
+
+        Object[] objData = new Object[dataSplitted.length];
+        for (int i = 0; i < dataSt.length; i++) {
+
+//            for (int c = i*22; c < 22*(i+1); c++) {
+//                objData[c] = dataSplitted[c];
+//            }
+
+            dataSt[i] = new erossPaProvincia(dataSplitted[])
+        }
+
     }
 
 

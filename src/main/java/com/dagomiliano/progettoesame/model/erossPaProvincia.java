@@ -31,4 +31,29 @@ public class erossPaProvincia {
     private float mediaFornitoriICT;
 
 
+    public erossPaProvincia(int idTerritorio, String territorio, int anno, float utilizzoFloss, float utilizzoFlossClient, float utilizzoFlossServer, float nonUtilizzatoriFloss, float utilizzatoriConsapevoliFloss, float utilizzatoriInconsapevoliFloss, float utilizzoFlossBrowser, float utilizzoOfficeAutomation, float utilizzoFlossPostaElettronica, float utilizzoFlossSitGis, float utilizzoFlossSO, float utilizzoFlossAppServer, float utilizzoFlossDBMS, float utilizzoFlossFileServer, float utilizzoFlossMailServer, float utilizzoFlossPrinterServer, float utilizzoFlossServerDesktopRemoto, float utilizzoFlossWebServer, float spesaMediaSoftwarePerAddetto, float mediaFornitoriICT) {
+        this.idTerritorio = idTerritorio;
+        this.territorio = territorio;
+        this.anno = anno;
+        this.utilizzoFloss = utilizzoFloss;
+        this.utilizzoFlossClient = utilizzoFlossClient;
+        this.utilizzoFlossServer = utilizzoFlossServer;
+        this.nonUtilizzatoriFloss = nonUtilizzatoriFloss;
+        this.utilizzatoriConsapevoliFloss = utilizzatoriConsapevoliFloss;
+        this.utilizzatoriInconsapevoliFloss = utilizzatoriInconsapevoliFloss;
+        this.utilizzoFlossBrowser = utilizzoFlossBrowser;
+        this.utilizzoOfficeAutomation = utilizzoOfficeAutomation;
+        this.utilizzoFlossPostaElettronica = utilizzoFlossPostaElettronica;
+        this.utilizzoFlossSitGis = utilizzoFlossSitGis;
+        this.utilizzoFlossSO = utilizzoFlossSO;
+        this.utilizzoFlossAppServer = utilizzoFlossAppServer;
+        this.utilizzoFlossDBMS = utilizzoFlossDBMS;
+        this.utilizzoFlossFileServer = utilizzoFlossFileServer;
+        this.utilizzoFlossMailServer = utilizzoFlossMailServer;
+        this.utilizzoFlossPrinterServer = utilizzoFlossPrinterServer;
+        this.utilizzoFlossServerDesktopRemoto = utilizzoFlossServerDesktopRemoto;
+        this.utilizzoFlossWebServer = utilizzoFlossWebServer;
+        this.spesaMediaSoftwarePerAddetto = spesaMediaSoftwarePerAddetto;
+        this.mediaFornitoriICT = mediaFornitoriICT;
+    }
 }
