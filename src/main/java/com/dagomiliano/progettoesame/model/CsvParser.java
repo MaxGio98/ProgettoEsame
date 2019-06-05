@@ -3,7 +3,9 @@ package com.dagomiliano.progettoesame.model;
 
 import org.springframework.boot.json.BasicJsonParser;
 
+import java.lang.*;
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -57,32 +59,101 @@ public class CsvParser {
         }
     }
 
-    public void ZIPfinder(String url, String name)
-    {
-        try {
-            URL urlOBJ = new URL(url);
-            InputStream in = urlOBJ.openStream();
-            ZipInputStream zis = new ZipInputStream(in);
-            ZipEntry entry = zis.getNextEntry();
-            while (!(entry.getName().equals(name)))
-            {
-                entry = zis.getNextEntry();
-            }
-            System.out.println(entry.getName());
+    public File ZIPdownload(String inUrl, String ZIPname) {
 
+        File newFile = new File(ZIPname);
+
+        try {
+
+            URL url = new URL(inUrl);
+            HttpURLConnection http = (HttpURLConnection) url.openConnection();
+            double fileSize = (double) http.getContentLengthLong();
+            BufferedInputStream in = new BufferedInputStream((http.getInputStream()));
+            FileOutputStream fout = new FileOutputStream(newFile);
+            BufferedOutputStream bout = new BufferedOutputStream(fout, 1024);
+            byte[] buffer = new byte[1024];
+            double downloaded = 0.00;
+            int read = 0;
+            double percentDownloaded = 0.00;
+            while ((read = in.read(buffer, 0, 1024)) >= 0) {
+                bout.write(buffer, 0, read);
+                downloaded += read;
+                percentDownloaded = (downloaded*100)/fileSize;
+                String percent = String.format("%.4f", percentDownloaded);
+                //System.out.println("Download: " + percent + "%");
+            }
+            bout.close();
             in.close();
-            zis.close();
-        }
-        catch(MalformedURLException e)
-        {
-            e.printStackTrace();
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
+            return newFile;
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
         }
     }
 
+    public InputStream ZIPfinder(File zipFileIn, String searchFile) {
+
+        try {
+            ZipFile zipFile = new ZipFile(zipFileIn);
+            ZipEntry entry = zipFile.getEntry(searchFile);
+            InputStream input = zipFile.getInputStream(entry);
+
+            String meta;
+            String data="";
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(input));
+            meta = br.readLine();
+
+            System.out.println("ciao");
+            System.out.println(meta);
+
+            String line;
+            while((line = br.readLine()) != null) {
+                data += line + "\n";
+
+            }
+
+//            for(data=br.readLine();)
+
+            System.out.println(data);
+
+
+
+            zipFile.close();
+
+            System.out.println(entry.getName());
+
+            return input;
+
+        } catch(ZipException e) {
+            e.printStackTrace();
+            return null;
+        } catch(IOException e) {
+            e.printStackTrace();
+            return null;
+
+        }
+
+    }
+
+
+
+    public void CSVparse(InputStream input) {
+
+        String meta;
+        String data;
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(input));
+            meta = br.readLine();
+            System.out.println("ciao");
+            System.out.println(meta);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
 
     //end class
