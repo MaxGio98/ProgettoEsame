@@ -92,67 +92,45 @@ public class CsvParser {
         }
     }
 
-    public InputStream ZIPfinder(File zipFileIn, String searchFile) {
+    public String ZIPfinder(File zipFileIn, String searchFile) {
 
         try {
             ZipFile zipFile = new ZipFile(zipFileIn);
             ZipEntry entry = zipFile.getEntry(searchFile);
             InputStream input = zipFile.getInputStream(entry);
-
-            String meta;
-            String data="";
-
             BufferedReader br = new BufferedReader(new InputStreamReader(input));
-            meta = br.readLine();
-
-            System.out.println("ciao");
-            System.out.println(meta);
-
+            String data="";
             String line;
             while((line = br.readLine()) != null) {
                 data += line + "\n";
-
             }
-
-//            for(data=br.readLine();)
-
-            System.out.println(data);
-
-
-
             zipFile.close();
-
-            System.out.println(entry.getName());
-
-            return input;
-
+            return data;
         } catch(ZipException e) {
             e.printStackTrace();
             return null;
         } catch(IOException e) {
             e.printStackTrace();
             return null;
-
         }
 
     }
 
 
 
-    public void CSVparse(InputStream input) {
-
-        String meta;
-        String data;
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(input));
-            meta = br.readLine();
-            System.out.println("ciao");
-            System.out.println(meta);
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void CSVparse(String dati) {
+        String meta, data="";
+        dati=dati.replaceAll("%", "");
+        dati=dati.replace("2.008","2008");
+        System.out.println(dati);
+        Scanner scanner = new Scanner(dati);
+        scanner.useDelimiter("\n");
+        meta = scanner.next();
+        while(scanner.hasNext()) {
+            data += scanner.next();
         }
-
-
+        String[] metaSplitted = meta.split(";");
+        String[] dataSplitted = data.split(";");
     }
 
 

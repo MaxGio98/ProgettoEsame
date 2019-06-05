@@ -20,7 +20,8 @@ public class ProgettoEsameApplication {
 		String url=p.JSONparse("https://www.dati.gov.it/api/3/action/package_show?id=42063df0-49ed-438a-91d4-fca8074166c4");
 		File zipFile;
 		zipFile = p.ZIPdownload(url, "EROSS_PA_PROVINCIA.zip");
-		InputStream in = p.ZIPfinder(zipFile, "EROSS_PA/EROSS_PA_PROVINCIA.csv");
+		String data = p.ZIPfinder(zipFile, "EROSS_PA/EROSS_PA_PROVINCIA.csv");
+		p.CSVparse(data);
 	}
 
 }
