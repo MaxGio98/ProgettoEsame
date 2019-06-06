@@ -12,15 +12,29 @@ import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
 /**
- *Classe utilizzata per effettuare il parsing remoto dei dati
+ * Classe per la gestione dei dati che vengono ricevuti al primo avvio partendo dal file json assegnato:
+ *
+ * dal json ci si riconduce all'url contenente il file .zip a sua volta contenente il file .csv d' interesse.
  */
 
 public class CsvParser {
 
+    /**
+     * Lista contenete gli oggetti ottenuti dal parsing del file .csv
+     */
     private List<erossPaProvincia> lista=new ArrayList<>();
-    
+
+    /**
+     * Stringa contenente il nome del file .zip da visitare
+     */
     private String nomeZIP="EROSS_PA_PROVINCIA.zip";
-    
+
+    /**
+     * Il metodo checkSER controlla che il file .ser contenente gli Oggetti ottenuti dal parsing
+     * esista all'interno della cartella principale del progetto.
+     * In tal caso carica gli oggetti contenuti nel file .ser all'interno della lista.
+     * Altrimenti l'applicazione si trova al suo primo avvio per cui procede al download dei file e al parsing.
+     */
     public void checkSER()
     {
         String data;
@@ -52,6 +66,14 @@ public class CsvParser {
         }
     }
 
+    /**
+     * Il metodo parseJson si occupa del parsing del file json dall'url che lo contiene.
+     * Il parsing del file è assegnato alla classe BasicJsonParser contenuta nelle librerie Spring.
+     * La visita della struttura dati ottenuta dal parsing è svolta attraverso i metodi della calsse Map.
+     *
+     * @param Url   url contenente il file json da parsare
+     * @return Stringa contenete l'url contenente il file .zip
+     */
     public String parseJSON(String Url) {
 
         String url = Url;
@@ -86,6 +108,14 @@ public class CsvParser {
         }
     }
 
+    /**
+     * Il metodo downloadZip si occupa del download del file .zip a partire dall'url che lo contiene
+     *
+     * @param inUrl     url contenente il file .zip
+     * @param ZIPname   nome con cui il file scaricato verrà salvato in memoria
+     * @return  File di estensione .zip scaricato dall'url dato in ingresso
+     */
+
     public File downloadZIP(String inUrl, String ZIPname) {
         File newFile = new File(ZIPname);
         try {
@@ -109,6 +139,14 @@ public class CsvParser {
         }
     }
 
+    /**
+     * Il metodo finderInZip si occupa della visita del file .zip scaricato precedentemente
+     * restituendo una Stringa contenente tutti i dati contenuti nel file .csv di interesse.
+     *
+     * @param zipFileIn     File .zip da visitare
+     * @param searchFile    nome del File .csv di interesse
+     * @return      Stringa contenente i dati contenuti nel file .csv
+     */
     public String finderInZIP(File zipFileIn, String searchFile) {
         try {
             ZipFile zipFile = new ZipFile(zipFileIn);
@@ -130,6 +168,15 @@ public class CsvParser {
             return null;
         }
     }
+
+    /**
+     * Il metodo parseCSV si occupa del parsing dei dati contenuti in unsa stringa (ottenuti dal csv di interesse),
+     * della creazione del file .ser contenente gli oggetti ,ottenuti dal parsing, e della cancellazione dalla memoria
+     * del file .zip di partenza
+     *
+     * @param dati      Stringa contenente i dati di partenza per la creazione degli oggetti che modellano
+     *                  i dati di interesse.
+     */
 
     public void parseCSV(String dati) {
         String meta, data="";

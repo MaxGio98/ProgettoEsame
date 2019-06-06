@@ -3,7 +3,10 @@ package com.dagomiliano.progettoesame.model;
 import java.io.Serializable;
 
 /**
- * Classe rappresentante le statistiche inerenti l'utilizzo di software con licenze di tipo Floss
+ *  Classe modellante dei dati contenente gli attributi presenti nel file .csv
+ *
+ *  Il file proposto contiene dati inerenti l'utilizzo di software con licenza FLOSS nelle province
+ *  dell' Emilia Romagno nel periodo dicembre 2007 - marzo 2008.
  */
 
 public class erossPaProvincia implements Serializable {
@@ -32,7 +35,33 @@ public class erossPaProvincia implements Serializable {
     private float spesaMediaSoftwarePerAddetto;
     private float mediaFornitoriICT;
 
-
+    /**
+     * Costruttore della classe
+     *
+     * @param idTerritorio
+     * @param territorio
+     * @param anno
+     * @param utilizzoFloss
+     * @param utilizzoFlossClient
+     * @param utilizzoFlossServer
+     * @param nonUtilizzatoriFloss
+     * @param utilizzatoriConsapevoliFloss
+     * @param utilizzatoriInconsapevoliFloss
+     * @param utilizzoFlossBrowser
+     * @param utilizzoOfficeAutomation
+     * @param utilizzoFlossPostaElettronica
+     * @param utilizzoFlossSitGis
+     * @param utilizzoFlossSO
+     * @param utilizzoFlossAppServer
+     * @param utilizzoFlossDBMS
+     * @param utilizzoFlossFileServer
+     * @param utilizzoFlossMailServer
+     * @param utilizzoFlossPrinterServer
+     * @param utilizzoFlossServerDesktopRemoto
+     * @param utilizzoFlossWebServer
+     * @param spesaMediaSoftwarePerAddetto
+     * @param mediaFornitoriICT
+     */
     public erossPaProvincia(int idTerritorio, String territorio, int anno, float utilizzoFloss, float utilizzoFlossClient, float utilizzoFlossServer, float nonUtilizzatoriFloss, float utilizzatoriConsapevoliFloss, float utilizzatoriInconsapevoliFloss, float utilizzoFlossBrowser, float utilizzoOfficeAutomation, float utilizzoFlossPostaElettronica, float utilizzoFlossSitGis, float utilizzoFlossSO, float utilizzoFlossAppServer, float utilizzoFlossDBMS, float utilizzoFlossFileServer, float utilizzoFlossMailServer, float utilizzoFlossPrinterServer, float utilizzoFlossServerDesktopRemoto, float utilizzoFlossWebServer, float spesaMediaSoftwarePerAddetto, float mediaFornitoriICT) {
         this.idTerritorio = idTerritorio;
         this.territorio = territorio;
