@@ -6,17 +6,13 @@ import org.springframework.boot.json.BasicJsonParser;
 import java.lang.*;
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
-import java.util.zip.ZipInputStream;
+
 
 
 /**
@@ -25,7 +21,39 @@ import java.util.zip.ZipInputStream;
 
 public class CsvParser {
 
-    private List<erossPaProvincia> lista=new ArrayList<erossPaProvincia>();
+    private List<erossPaProvincia> lista=new ArrayList<>();
+
+    public void checkSER()
+    {
+        String data;
+        String nomeZIP="EROSS_PA_PROVINCIA.zip";
+        File findSer=new File("lista.ser");
+        if(findSer.exists())
+        {
+            try {
+                FileInputStream fileIn = new FileInputStream("lista.ser");
+                ObjectInputStream in = new ObjectInputStream(fileIn);
+                lista = (List<erossPaProvincia>) in.readObject();
+                in.close();
+                fileIn.close();
+            } catch (IOException i) {
+                i.printStackTrace();
+                return;
+            } catch (ClassNotFoundException c) {
+                System.out.println("Non trovato");
+                c.printStackTrace();
+                return;
+            }
+        }
+        else
+        {
+            String url=JSONparse("https://www.dati.gov.it/api/3/action/package_show?id=42063df0-49ed-438a-91d4-fca8074166c4");
+            File zipFile = ZIPdownload(url, nomeZIP);
+            data = ZIPfinder(zipFile, "EROSS_PA/EROSS_PA_PROVINCIA.csv");
+            CSVparse(data);
+        }
+    }
+
     public String JSONparse(String Url) {
 
         String url = Url;
@@ -86,7 +114,6 @@ public class CsvParser {
             bout.close();
             in.close();
             return newFile;
-
         } catch (IOException ex) {
             ex.printStackTrace();
             return null;
@@ -94,7 +121,6 @@ public class CsvParser {
     }
 
     public String ZIPfinder(File zipFileIn, String searchFile) {
-
         try {
             ZipFile zipFile = new ZipFile(zipFileIn);
             ZipEntry entry = zipFile.getEntry(searchFile);
@@ -114,10 +140,7 @@ public class CsvParser {
             e.printStackTrace();
             return null;
         }
-
     }
-
-
 
     public void CSVparse(String dati) {
         String meta, data="";
@@ -139,9 +162,15 @@ public class CsvParser {
             erossPaProvincia ePP=new erossPaProvincia(Integer.parseInt(dataSplitted[i]),dataSplitted[i+1],Integer.parseInt(dataSplitted[i+2]),Float.parseFloat(dataSplitted[i+3]),Float.parseFloat(dataSplitted[i+4]),Float.parseFloat(dataSplitted[i+5]),Float.parseFloat(dataSplitted[i+6]),Float.parseFloat(dataSplitted[i+7]),Float.parseFloat(dataSplitted[i+8]),Float.parseFloat(dataSplitted[i+9]),Float.parseFloat(dataSplitted[i+10]),Float.parseFloat(dataSplitted[i+11]),Float.parseFloat(dataSplitted[i+12]),Float.parseFloat(dataSplitted[i+13]),Float.parseFloat(dataSplitted[i+14]),Float.parseFloat(dataSplitted[i+15]),Float.parseFloat(dataSplitted[i+16]),Float.parseFloat(dataSplitted[i+17]),Float.parseFloat(dataSplitted[i+18]),Float.parseFloat(dataSplitted[i+19]),Float.parseFloat(dataSplitted[i+20]),Float.parseFloat(dataSplitted[i+21]),Float.parseFloat(dataSplitted[i+22]));
             lista.add(ePP);
         }
-
+        try {
+            FileOutputStream fileOut = new FileOutputStream("lista.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(lista);
+            out.close();
+            fileOut.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
     }
-
-
     //end class
 }

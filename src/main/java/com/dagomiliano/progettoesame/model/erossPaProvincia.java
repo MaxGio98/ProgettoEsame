@@ -1,10 +1,12 @@
 package com.dagomiliano.progettoesame.model;
 
+import java.io.Serializable;
+
 /**
  * Classe rappresentante le statistiche inerenti l'utilizzo di software con licenze di tipo Floss
  */
 
-public class erossPaProvincia {
+public class erossPaProvincia implements Serializable {
 
     private int idTerritorio;
     private String territorio;
@@ -55,5 +57,98 @@ public class erossPaProvincia {
         this.utilizzoFlossWebServer = utilizzoFlossWebServer;
         this.spesaMediaSoftwarePerAddetto = spesaMediaSoftwarePerAddetto;
         this.mediaFornitoriICT = mediaFornitoriICT;
+    }
+
+    public int getIdTerritorio() {
+        return idTerritorio;
+    }
+
+    public String getTerritorio() {
+        return territorio;
+    }
+
+    public int getAnno() {
+        return anno;
+    }
+
+
+    public float getUtilizzoFloss() {
+        return utilizzoFloss;
+    }
+
+    public float getUtilizzoFlossClient() {
+        return utilizzoFlossClient;
+    }
+
+    public float getUtilizzoFlossServer() {
+        return utilizzoFlossServer;
+    }
+
+    public float getNonUtilizzatoriFloss() {
+        return nonUtilizzatoriFloss;
+    }
+
+    public float getUtilizzatoriConsapevoliFloss() {
+        return utilizzatoriConsapevoliFloss;
+    }
+
+    public float getUtilizzatoriInconsapevoliFloss() {
+        return utilizzatoriInconsapevoliFloss;
+    }
+
+    public float getUtilizzoFlossBrowser() {
+        return utilizzoFlossBrowser;
+    }
+
+    public float getUtilizzoOfficeAutomation() {
+        return utilizzoOfficeAutomation;
+    }
+
+    public float getUtilizzoFlossPostaElettronica() {
+        return utilizzoFlossPostaElettronica;
+    }
+
+    public float getUtilizzoFlossSitGis() {
+        return utilizzoFlossSitGis;
+    }
+
+    public float getUtilizzoFlossSO() {
+        return utilizzoFlossSO;
+    }
+
+    public float getUtilizzoFlossAppServer() {
+        return utilizzoFlossAppServer;
+    }
+
+    public float getUtilizzoFlossDBMS() {
+        return utilizzoFlossDBMS;
+    }
+
+    public float getUtilizzoFlossFileServer() {
+        return utilizzoFlossFileServer;
+    }
+
+    public float getUtilizzoFlossMailServer() {
+        return utilizzoFlossMailServer;
+    }
+
+    public float getUtilizzoFlossPrinterServer() {
+        return utilizzoFlossPrinterServer;
+    }
+
+    public float getUtilizzoFlossServerDesktopRemoto() {
+        return utilizzoFlossServerDesktopRemoto;
+    }
+
+    public float getUtilizzoFlossWebServer() {
+        return utilizzoFlossWebServer;
+    }
+
+    public float getSpesaMediaSoftwarePerAddetto() {
+        return spesaMediaSoftwarePerAddetto;
+    }
+
+    public float getMediaFornitoriICT() {
+        return mediaFornitoriICT;
     }
 }

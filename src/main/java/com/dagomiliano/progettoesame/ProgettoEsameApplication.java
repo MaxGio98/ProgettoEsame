@@ -15,13 +15,13 @@ public class ProgettoEsameApplication {
 
 	public static void main(String[] args) throws IOException {
 		SpringApplication.run(ProgettoEsameApplication.class, args);
-
 		CsvParser p = new CsvParser();
-		String url=p.JSONparse("https://www.dati.gov.it/api/3/action/package_show?id=42063df0-49ed-438a-91d4-fca8074166c4");
-		File zipFile;
-		zipFile = p.ZIPdownload(url, "EROSS_PA_PROVINCIA.zip");
-		String data = p.ZIPfinder(zipFile, "EROSS_PA/EROSS_PA_PROVINCIA.csv");
-		p.CSVparse(data);
+//		String url=p.JSONparse("https://www.dati.gov.it/api/3/action/package_show?id=42063df0-49ed-438a-91d4-fca8074166c4");
+//		File zipFile;
+//		zipFile = p.ZIPdownload(url, "EROSS_PA_PROVINCIA.zip");
+//		String data = p.ZIPfinder(zipFile, "EROSS_PA/EROSS_PA_PROVINCIA.csv");
+//		p.CSVparse(data);
+		p.checkSER();
 	}
 
 }
