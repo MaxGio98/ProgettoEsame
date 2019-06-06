@@ -1,7 +1,5 @@
 package com.dagomiliano.progettoesame.model;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.json.BasicJsonParser;
 import java.lang.*;
 import java.io.*;
@@ -24,7 +22,7 @@ public class CsvParser {
     /**
      * Lista contenete gli oggetti ottenuti dal parsing del file .csv
      */
-    private List<erossPaProvincia> lista=new ArrayList<>();
+    private List<ErossPaProvincia> lista=new ArrayList<>();
 
     /**
      * Stringa contenente il nome del file .zip da visitare
@@ -49,7 +47,7 @@ public class CsvParser {
         return this.metaData;
     }
 
-    public List<erossPaProvincia> getList() {
+    public List<ErossPaProvincia> getList() {
         return this.lista;
     }
 
@@ -69,7 +67,7 @@ public class CsvParser {
             try {
                 FileInputStream fileIn = new FileInputStream("lista.ser");
                 ObjectInputStream in = new ObjectInputStream(fileIn);
-                lista = (List<erossPaProvincia>) in.readObject();
+                lista = (List<ErossPaProvincia>) in.readObject();
                 in.close();
                 fileIn.close();
             } catch (IOException i) {
@@ -219,7 +217,7 @@ public class CsvParser {
         String[] dataSplitted = data.split(";");
         for(int i=0; i<dataSplitted.length;i+=23)
         {
-            erossPaProvincia ePP=new erossPaProvincia(Integer.parseInt(dataSplitted[i]),dataSplitted[i+1],Integer.parseInt(dataSplitted[i+2]),Float.parseFloat(dataSplitted[i+3]),Float.parseFloat(dataSplitted[i+4]),Float.parseFloat(dataSplitted[i+5]),Float.parseFloat(dataSplitted[i+6]),Float.parseFloat(dataSplitted[i+7]),Float.parseFloat(dataSplitted[i+8]),Float.parseFloat(dataSplitted[i+9]),Float.parseFloat(dataSplitted[i+10]),Float.parseFloat(dataSplitted[i+11]),Float.parseFloat(dataSplitted[i+12]),Float.parseFloat(dataSplitted[i+13]),Float.parseFloat(dataSplitted[i+14]),Float.parseFloat(dataSplitted[i+15]),Float.parseFloat(dataSplitted[i+16]),Float.parseFloat(dataSplitted[i+17]),Float.parseFloat(dataSplitted[i+18]),Float.parseFloat(dataSplitted[i+19]),Float.parseFloat(dataSplitted[i+20]),Float.parseFloat(dataSplitted[i+21]),Float.parseFloat(dataSplitted[i+22]));
+            ErossPaProvincia ePP=new ErossPaProvincia(Integer.parseInt(dataSplitted[i]),dataSplitted[i+1],Integer.parseInt(dataSplitted[i+2]),Float.parseFloat(dataSplitted[i+3]),Float.parseFloat(dataSplitted[i+4]),Float.parseFloat(dataSplitted[i+5]),Float.parseFloat(dataSplitted[i+6]),Float.parseFloat(dataSplitted[i+7]),Float.parseFloat(dataSplitted[i+8]),Float.parseFloat(dataSplitted[i+9]),Float.parseFloat(dataSplitted[i+10]),Float.parseFloat(dataSplitted[i+11]),Float.parseFloat(dataSplitted[i+12]),Float.parseFloat(dataSplitted[i+13]),Float.parseFloat(dataSplitted[i+14]),Float.parseFloat(dataSplitted[i+15]),Float.parseFloat(dataSplitted[i+16]),Float.parseFloat(dataSplitted[i+17]),Float.parseFloat(dataSplitted[i+18]),Float.parseFloat(dataSplitted[i+19]),Float.parseFloat(dataSplitted[i+20]),Float.parseFloat(dataSplitted[i+21]),Float.parseFloat(dataSplitted[i+22]));
             lista.add(ePP);
         }
         try {

@@ -7,10 +7,10 @@ import java.util.List;
 
 
 @Component
-public class erossPaProvinciaService {
+public class ErossPaProvinciaService {
 
-    private static List<erossPaProvincia> provincias = new ArrayList<>();
-
+    private static List<ErossPaProvincia> provincias = new ArrayList<>();
+    static
     {
         // Inizializza i dati
         CsvParser p = new CsvParser();
@@ -18,31 +18,33 @@ public class erossPaProvinciaService {
         provincias = p.getList();
     }
 
-    public List<erossPaProvincia> getDatas() {
+    public List<ErossPaProvincia> getDatas() {
         return provincias;
     }
 
-    public erossPaProvincia getDatoById(int id) {
-        for (erossPaProvincia obj : provincias) {
+    public ErossPaProvincia getDatoById(int id) {
+        for (ErossPaProvincia obj : provincias) {
             if (obj.getIdTerritorio() == id) {
                 return obj;
             }
         }
-        return null;
+        ErossPaProvincia err=new ErossPaProvincia(0,"ERRORE ID INSERITO",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+        return err;
     }
 
-    public erossPaProvincia getDatoByProvincia(String prov) {
+    public ErossPaProvincia getDatoByProvincia(String prov) {
         if (prov.equals("ER")) {
             return provincias.get(provincias.size()-1);
         } else {
-            String provTemp = "prov. di " + prov;
-            for (erossPaProvincia obj : provincias) {
+            String provTemp = "terr.prov. di " + prov;
+            for (ErossPaProvincia obj : provincias) {
                 if (obj.getTerritorio().equals(provTemp)){
                     return obj;
                 }
             }
             System.out.println("Parametro non corretto");
-            return null;
+            ErossPaProvincia err=new ErossPaProvincia(0,"ERRORE PROVINCIA INSERITA",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+            return err;
         }
     }
 

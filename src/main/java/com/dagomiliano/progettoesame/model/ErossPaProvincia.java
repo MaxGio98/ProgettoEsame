@@ -9,7 +9,7 @@ import java.io.Serializable;
  *  dell' Emilia Romagno nel periodo dicembre 2007 - marzo 2008.
  */
 
-public class erossPaProvincia implements Serializable {
+public class ErossPaProvincia implements Serializable {
 
     private int idTerritorio;
     private String territorio;
@@ -62,7 +62,7 @@ public class erossPaProvincia implements Serializable {
      * @param spesaMediaSoftwarePerAddetto
      * @param mediaFornitoriICT
      */
-    public erossPaProvincia(int idTerritorio, String territorio, int anno, float utilizzoFloss, float utilizzoFlossClient, float utilizzoFlossServer, float nonUtilizzatoriFloss, float utilizzatoriConsapevoliFloss, float utilizzatoriInconsapevoliFloss, float utilizzoFlossBrowser, float utilizzoOfficeAutomation, float utilizzoFlossPostaElettronica, float utilizzoFlossSitGis, float utilizzoFlossSO, float utilizzoFlossAppServer, float utilizzoFlossDBMS, float utilizzoFlossFileServer, float utilizzoFlossMailServer, float utilizzoFlossPrinterServer, float utilizzoFlossServerDesktopRemoto, float utilizzoFlossWebServer, float spesaMediaSoftwarePerAddetto, float mediaFornitoriICT) {
+    public ErossPaProvincia(int idTerritorio, String territorio, int anno, float utilizzoFloss, float utilizzoFlossClient, float utilizzoFlossServer, float nonUtilizzatoriFloss, float utilizzatoriConsapevoliFloss, float utilizzatoriInconsapevoliFloss, float utilizzoFlossBrowser, float utilizzoOfficeAutomation, float utilizzoFlossPostaElettronica, float utilizzoFlossSitGis, float utilizzoFlossSO, float utilizzoFlossAppServer, float utilizzoFlossDBMS, float utilizzoFlossFileServer, float utilizzoFlossMailServer, float utilizzoFlossPrinterServer, float utilizzoFlossServerDesktopRemoto, float utilizzoFlossWebServer, float spesaMediaSoftwarePerAddetto, float mediaFornitoriICT) {
         this.idTerritorio = idTerritorio;
         this.territorio = territorio;
         this.anno = anno;
@@ -99,7 +99,6 @@ public class erossPaProvincia implements Serializable {
     public int getAnno() {
         return anno;
     }
-
 
     public float getUtilizzoFloss() {
         return utilizzoFloss;
@@ -180,4 +179,5 @@ public class erossPaProvincia implements Serializable {
     public float getMediaFornitoriICT() {
         return mediaFornitoriICT;
     }
+
 }
