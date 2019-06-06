@@ -5,8 +5,10 @@ import com.dagomiliano.progettoesame.model.ErossPaProvinciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 public class ErossPaProvinciaController {
@@ -24,6 +26,16 @@ public class ErossPaProvinciaController {
     public ErossPaProvincia searchProvincia(@PathVariable String territorio)
     {
         return ePP.getDatoByProvincia(territorio);
+    }
+
+    @GetMapping("/all")
+    public List<ErossPaProvincia> searchAll() {
+        return ePP.getAll();
+    }
+
+    @GetMapping("/floss/avg")
+    public Map getAvg() {
+        return ePP.avg();
     }
 
 }
