@@ -1,8 +1,6 @@
 package com.dagomiliano.progettoesame.model;
 
-
 import org.springframework.boot.json.BasicJsonParser;
-
 import java.lang.*;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -13,8 +11,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
-
-
 /**
  *Classe utilizzata per effettuare il parsing remoto dei dati
  */
@@ -22,11 +18,13 @@ import java.util.zip.ZipFile;
 public class CsvParser {
 
     private List<erossPaProvincia> lista=new ArrayList<>();
-
+    
+    private String nomeZIP="EROSS_PA_PROVINCIA.zip";
+    
     public void checkSER()
     {
         String data;
-        String nomeZIP="EROSS_PA_PROVINCIA.zip";
+
         File findSer=new File("lista.ser");
         if(findSer.exists())
         {
@@ -47,14 +45,14 @@ public class CsvParser {
         }
         else
         {
-            String url=JSONparse("https://www.dati.gov.it/api/3/action/package_show?id=42063df0-49ed-438a-91d4-fca8074166c4");
-            File zipFile = ZIPdownload(url, nomeZIP);
-            data = ZIPfinder(zipFile, "EROSS_PA/EROSS_PA_PROVINCIA.csv");
-            CSVparse(data);
+            String url=parseJSON("https://www.dati.gov.it/api/3/action/package_show?id=42063df0-49ed-438a-91d4-fca8074166c4");
+            File zipFile = downloadZIP(url, this.nomeZIP);
+            data = finderInZIP(zipFile, "EROSS_PA/EROSS_PA_PROVINCIA.csv");
+            parseCSV(data);
         }
     }
 
-    public String JSONparse(String Url) {
+    public String parseJSON(String Url) {
 
         String url = Url;
         try {
@@ -88,28 +86,19 @@ public class CsvParser {
         }
     }
 
-    public File ZIPdownload(String inUrl, String ZIPname) {
-
+    public File downloadZIP(String inUrl, String ZIPname) {
         File newFile = new File(ZIPname);
-
         try {
 
             URL url = new URL(inUrl);
             HttpURLConnection http = (HttpURLConnection) url.openConnection();
-            double fileSize = (double) http.getContentLengthLong();
             BufferedInputStream in = new BufferedInputStream((http.getInputStream()));
             FileOutputStream fout = new FileOutputStream(newFile);
             BufferedOutputStream bout = new BufferedOutputStream(fout, 1024);
             byte[] buffer = new byte[1024];
-            double downloaded = 0.00;
             int read = 0;
-            double percentDownloaded = 0.00;
             while ((read = in.read(buffer, 0, 1024)) >= 0) {
                 bout.write(buffer, 0, read);
-                downloaded += read;
-                percentDownloaded = (downloaded*100)/fileSize;
-                String percent = String.format("%.4f", percentDownloaded);
-                //System.out.println("Download: " + percent + "%");
             }
             bout.close();
             in.close();
@@ -120,7 +109,7 @@ public class CsvParser {
         }
     }
 
-    public String ZIPfinder(File zipFileIn, String searchFile) {
+    public String finderInZIP(File zipFileIn, String searchFile) {
         try {
             ZipFile zipFile = new ZipFile(zipFileIn);
             ZipEntry entry = zipFile.getEntry(searchFile);
@@ -142,7 +131,7 @@ public class CsvParser {
         }
     }
 
-    public void CSVparse(String dati) {
+    public void parseCSV(String dati) {
         String meta, data="";
         Scanner scanner = new Scanner(dati);
         scanner.useDelimiter("\n");
@@ -155,8 +144,6 @@ public class CsvParser {
         data = data.replace("2.008","2008");
         String[] metaSplitted = meta.split(";");
         String[] dataSplitted = data.split(";");
-//        erossPaProvincia[] dataSt = new erossPaProvincia[10];
-//        Object[] objData = new Object[dataSplitted.length];
         for(int i=0; i<dataSplitted.length;i+=23)
         {
             erossPaProvincia ePP=new erossPaProvincia(Integer.parseInt(dataSplitted[i]),dataSplitted[i+1],Integer.parseInt(dataSplitted[i+2]),Float.parseFloat(dataSplitted[i+3]),Float.parseFloat(dataSplitted[i+4]),Float.parseFloat(dataSplitted[i+5]),Float.parseFloat(dataSplitted[i+6]),Float.parseFloat(dataSplitted[i+7]),Float.parseFloat(dataSplitted[i+8]),Float.parseFloat(dataSplitted[i+9]),Float.parseFloat(dataSplitted[i+10]),Float.parseFloat(dataSplitted[i+11]),Float.parseFloat(dataSplitted[i+12]),Float.parseFloat(dataSplitted[i+13]),Float.parseFloat(dataSplitted[i+14]),Float.parseFloat(dataSplitted[i+15]),Float.parseFloat(dataSplitted[i+16]),Float.parseFloat(dataSplitted[i+17]),Float.parseFloat(dataSplitted[i+18]),Float.parseFloat(dataSplitted[i+19]),Float.parseFloat(dataSplitted[i+20]),Float.parseFloat(dataSplitted[i+21]),Float.parseFloat(dataSplitted[i+22]));
@@ -168,9 +155,12 @@ public class CsvParser {
             out.writeObject(lista);
             out.close();
             fileOut.close();
+
         } catch (IOException i) {
             i.printStackTrace();
         }
+        File zipFile=new File(this.nomeZIP);
+        zipFile.delete();
     }
     //end class
 }
