@@ -1,5 +1,7 @@
 package com.dagomiliano.progettoesame.model;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.json.BasicJsonParser;
 import java.lang.*;
 import java.io.*;
@@ -28,6 +30,28 @@ public class CsvParser {
      * Stringa contenente il nome del file .zip da visitare
      */
     private String nomeZIP="EROSS_PA_PROVINCIA.zip";
+    /**
+     * Stringa contenente i metadati derivati dal csv
+     */
+    private String metaData;
+    /**
+     * Stringa contenente i dati derivati dal csv
+     */
+    private String data;
+
+    // END PARAMETERS
+
+    public String getData() {
+        return this.data;
+    }
+
+    public String getMetaData() {
+        return this.metaData;
+    }
+
+    public List<erossPaProvincia> getList() {
+        return this.lista;
+    }
 
     /**
      * Il metodo checkSER controlla che il file .ser contenente gli Oggetti ottenuti dal parsing
@@ -183,9 +207,11 @@ public class CsvParser {
         Scanner scanner = new Scanner(dati);
         scanner.useDelimiter("\n");
         meta = scanner.next();
+        this.metaData = meta;
         while(scanner.hasNext()) {
             data += scanner.next();
         }
+        this.data = data;
         data = data.replaceAll("%", "");
         data=data.replaceAll(",",".");
         data = data.replace("2.008","2008");

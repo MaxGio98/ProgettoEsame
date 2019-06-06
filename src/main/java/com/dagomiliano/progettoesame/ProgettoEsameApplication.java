@@ -15,8 +15,7 @@ public class ProgettoEsameApplication {
 
 	public static void main(String[] args) throws IOException {
 		SpringApplication.run(ProgettoEsameApplication.class, args);
-		CsvParser p = new CsvParser();
-		p.checkSER();
+
 	}
 
 }
