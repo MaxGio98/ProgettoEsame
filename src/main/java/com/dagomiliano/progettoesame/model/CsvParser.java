@@ -206,27 +206,43 @@ public class CsvParser {
         scanner.useDelimiter("\n");
         meta = scanner.next();
         this.metaData = meta;
+        System.out.println(meta);
         while(scanner.hasNext()) {
-            data += scanner.next();
+            data += (scanner.next()+"\n");
         }
         this.data = data;
+        //System.out.println(data);
         data = data.replaceAll("%", "");
         data=data.replaceAll(",",".");
         data = data.replace("2.008","2008");
+        String[] dataRighe=data.split("\n");
         String[] metaSplitted = meta.split(";");
-        String[] dataSplitted = data.split(";");
-        for(int i=0; i<dataSplitted.length;i+=23)
+        for(int i=0;i<(dataRighe.length-1);i++)
         {
-            ErossPaProvincia ePP=new ErossPaProvincia(Integer.parseInt(dataSplitted[i]),dataSplitted[i+1],Integer.parseInt(dataSplitted[i+2]),Float.parseFloat(dataSplitted[i+3]),Float.parseFloat(dataSplitted[i+4]),Float.parseFloat(dataSplitted[i+5]),Float.parseFloat(dataSplitted[i+6]),Float.parseFloat(dataSplitted[i+7]),Float.parseFloat(dataSplitted[i+8]),Float.parseFloat(dataSplitted[i+9]),Float.parseFloat(dataSplitted[i+10]),Float.parseFloat(dataSplitted[i+11]),Float.parseFloat(dataSplitted[i+12]),Float.parseFloat(dataSplitted[i+13]),Float.parseFloat(dataSplitted[i+14]),Float.parseFloat(dataSplitted[i+15]),Float.parseFloat(dataSplitted[i+16]),Float.parseFloat(dataSplitted[i+17]),Float.parseFloat(dataSplitted[i+18]),Float.parseFloat(dataSplitted[i+19]),Float.parseFloat(dataSplitted[i+20]),Float.parseFloat(dataSplitted[i+21]),Float.parseFloat(dataSplitted[i+22]));
+            String line=dataRighe[i];
+            System.out.println(line);
+            String[] dataSplitted = line.split(";");
+            ErossPaProvincia ePP=new ErossPaProvincia(Integer.parseInt(dataSplitted[0]),dataSplitted[1],Integer.parseInt(dataSplitted[2]),Float.parseFloat(dataSplitted[3]),Float.parseFloat(dataSplitted[4]),Float.parseFloat(dataSplitted[5]),Float.parseFloat(dataSplitted[6]),Float.parseFloat(dataSplitted[7]),Float.parseFloat(dataSplitted[8]),Float.parseFloat(dataSplitted[9]),Float.parseFloat(dataSplitted[10]),Float.parseFloat(dataSplitted[11]),Float.parseFloat(dataSplitted[12]),Float.parseFloat(dataSplitted[13]),Float.parseFloat(dataSplitted[14]),Float.parseFloat(dataSplitted[15]),Float.parseFloat(dataSplitted[16]),Float.parseFloat(dataSplitted[17]),Float.parseFloat(dataSplitted[18]),Float.parseFloat(dataSplitted[19]),Float.parseFloat(dataSplitted[20]),Float.parseFloat(dataSplitted[21]),Float.parseFloat(dataSplitted[22]));
             lista.add(ePP);
         }
+        int lastNotRandomId=lista.get(lista.size()-1).getIdTerritorio();
+        Random r=new Random();
+        for(int i=1;i<=90;i++)
+        {
+            String randomPro= "terr.prov. di "+(char)(r.nextInt(90-65)+65)+(char)(r.nextInt(90-65)+65);
+            ErossPaProvincia ePP=new ErossPaProvincia(lastNotRandomId+i,randomPro,2008,r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100));
+            lista.add(ePP);
+        }
+//        for(int i=0;i<lista.size();i++)
+//        {
+//            System.out.println(lista.get(i));
+//        }
         try {
             FileOutputStream fileOut = new FileOutputStream("lista.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(lista);
             out.close();
             fileOut.close();
-
         } catch (IOException i) {
             i.printStackTrace();
         }

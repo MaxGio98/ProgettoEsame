@@ -180,4 +180,32 @@ public class ErossPaProvincia implements Serializable {
         return mediaFornitoriICT;
     }
 
+    @Override
+    public String toString() {
+        return "ErossPaProvincia{" +
+                "idTerritorio=" + idTerritorio +
+                ", territorio='" + territorio + '\'' +
+                ", anno=" + anno +
+                ", utilizzoFloss=" + utilizzoFloss +
+                ", utilizzoFlossClient=" + utilizzoFlossClient +
+                ", utilizzoFlossServer=" + utilizzoFlossServer +
+                ", nonUtilizzatoriFloss=" + nonUtilizzatoriFloss +
+                ", utilizzatoriConsapevoliFloss=" + utilizzatoriConsapevoliFloss +
+                ", utilizzatoriInconsapevoliFloss=" + utilizzatoriInconsapevoliFloss +
+                ", utilizzoFlossBrowser=" + utilizzoFlossBrowser +
+                ", utilizzoOfficeAutomation=" + utilizzoOfficeAutomation +
+                ", utilizzoFlossPostaElettronica=" + utilizzoFlossPostaElettronica +
+                ", utilizzoFlossSitGis=" + utilizzoFlossSitGis +
+                ", utilizzoFlossSO=" + utilizzoFlossSO +
+                ", utilizzoFlossAppServer=" + utilizzoFlossAppServer +
+                ", utilizzoFlossDBMS=" + utilizzoFlossDBMS +
+                ", utilizzoFlossFileServer=" + utilizzoFlossFileServer +
+                ", utilizzoFlossMailServer=" + utilizzoFlossMailServer +
+                ", utilizzoFlossPrinterServer=" + utilizzoFlossPrinterServer +
+                ", utilizzoFlossServerDesktopRemoto=" + utilizzoFlossServerDesktopRemoto +
+                ", utilizzoFlossWebServer=" + utilizzoFlossWebServer +
+                ", spesaMediaSoftwarePerAddetto=" + spesaMediaSoftwarePerAddetto +
+                ", mediaFornitoriICT=" + mediaFornitoriICT +
+                '}';
+    }
 }
