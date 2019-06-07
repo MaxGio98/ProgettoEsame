@@ -14,26 +14,26 @@ public class ErossPaProvincia implements Serializable {
     private int idTerritorio;
     private String territorio;
     private int anno;
-    private float utilizzoFloss;
-    private float utilizzoFlossClient;
-    private float utilizzoFlossServer;
-    private float nonUtilizzatoriFloss;
-    private float utilizzatoriConsapevoliFloss;
-    private float utilizzatoriInconsapevoliFloss;
-    private float utilizzoFlossBrowser;
-    private float utilizzoOfficeAutomation;
-    private float utilizzoFlossPostaElettronica;
-    private float utilizzoFlossSitGis;
-    private float utilizzoFlossSO;
-    private float utilizzoFlossAppServer;
-    private float utilizzoFlossDBMS;
-    private float utilizzoFlossFileServer;
-    private float utilizzoFlossMailServer;
-    private float utilizzoFlossPrinterServer;
-    private float utilizzoFlossServerDesktopRemoto;
-    private float utilizzoFlossWebServer;
-    private float spesaMediaSoftwarePerAddetto;
-    private float mediaFornitoriICT;
+    private int utilizzoFloss;
+    private int utilizzoFlossClient;
+    private int utilizzoFlossServer;
+    private int nonUtilizzatoriFloss;
+    private int utilizzatoriConsapevoliFloss;
+    private int utilizzatoriInconsapevoliFloss;
+    private int utilizzoFlossBrowser;
+    private int utilizzoOfficeAutomation;
+    private int utilizzoFlossPostaElettronica;
+    private int utilizzoFlossSitGis;
+    private int utilizzoFlossSO;
+    private int utilizzoFlossAppServer;
+    private int utilizzoFlossDBMS;
+    private int utilizzoFlossFileServer;
+    private int utilizzoFlossMailServer;
+    private int utilizzoFlossPrinterServer;
+    private int utilizzoFlossServerDesktopRemoto;
+    private int utilizzoFlossWebServer;
+    private double spesaMediaSoftwarePerAddetto;
+    private int mediaFornitoriICT;
 
     /**
      * Costruttore della classe
@@ -62,7 +62,7 @@ public class ErossPaProvincia implements Serializable {
      * @param spesaMediaSoftwarePerAddetto
      * @param mediaFornitoriICT
      */
-    public ErossPaProvincia(int idTerritorio, String territorio, int anno, float utilizzoFloss, float utilizzoFlossClient, float utilizzoFlossServer, float nonUtilizzatoriFloss, float utilizzatoriConsapevoliFloss, float utilizzatoriInconsapevoliFloss, float utilizzoFlossBrowser, float utilizzoOfficeAutomation, float utilizzoFlossPostaElettronica, float utilizzoFlossSitGis, float utilizzoFlossSO, float utilizzoFlossAppServer, float utilizzoFlossDBMS, float utilizzoFlossFileServer, float utilizzoFlossMailServer, float utilizzoFlossPrinterServer, float utilizzoFlossServerDesktopRemoto, float utilizzoFlossWebServer, float spesaMediaSoftwarePerAddetto, float mediaFornitoriICT) {
+    public ErossPaProvincia(int idTerritorio, String territorio, int anno, int utilizzoFloss, int utilizzoFlossClient, int utilizzoFlossServer, int nonUtilizzatoriFloss, int utilizzatoriConsapevoliFloss, int utilizzatoriInconsapevoliFloss, int utilizzoFlossBrowser, int utilizzoOfficeAutomation, int utilizzoFlossPostaElettronica, int utilizzoFlossSitGis, int utilizzoFlossSO, int utilizzoFlossAppServer, int utilizzoFlossDBMS, int utilizzoFlossFileServer, int utilizzoFlossMailServer, int utilizzoFlossPrinterServer, int utilizzoFlossServerDesktopRemoto, int utilizzoFlossWebServer, double spesaMediaSoftwarePerAddetto, int mediaFornitoriICT) {
         this.idTerritorio = idTerritorio;
         this.territorio = territorio;
         this.anno = anno;
@@ -100,83 +100,83 @@ public class ErossPaProvincia implements Serializable {
         return anno;
     }
 
-    public float getUtilizzoFloss() {
+    public int getUtilizzoFloss() {
         return utilizzoFloss;
     }
 
-    public float getUtilizzoFlossClient() {
+    public int getUtilizzoFlossClient() {
         return utilizzoFlossClient;
     }
 
-    public float getUtilizzoFlossServer() {
+    public int getUtilizzoFlossServer() {
         return utilizzoFlossServer;
     }
 
-    public float getNonUtilizzatoriFloss() {
+    public int getNonUtilizzatoriFloss() {
         return nonUtilizzatoriFloss;
     }
 
-    public float getUtilizzatoriConsapevoliFloss() {
+    public int getUtilizzatoriConsapevoliFloss() {
         return utilizzatoriConsapevoliFloss;
     }
 
-    public float getUtilizzatoriInconsapevoliFloss() {
+    public int getUtilizzatoriInconsapevoliFloss() {
         return utilizzatoriInconsapevoliFloss;
     }
 
-    public float getUtilizzoFlossBrowser() {
+    public int getUtilizzoFlossBrowser() {
         return utilizzoFlossBrowser;
     }
 
-    public float getUtilizzoOfficeAutomation() {
+    public int getUtilizzoOfficeAutomation() {
         return utilizzoOfficeAutomation;
     }
 
-    public float getUtilizzoFlossPostaElettronica() {
+    public int getUtilizzoFlossPostaElettronica() {
         return utilizzoFlossPostaElettronica;
     }
 
-    public float getUtilizzoFlossSitGis() {
+    public int getUtilizzoFlossSitGis() {
         return utilizzoFlossSitGis;
     }
 
-    public float getUtilizzoFlossSO() {
+    public int getUtilizzoFlossSO() {
         return utilizzoFlossSO;
     }
 
-    public float getUtilizzoFlossAppServer() {
+    public int getUtilizzoFlossAppServer() {
         return utilizzoFlossAppServer;
     }
 
-    public float getUtilizzoFlossDBMS() {
+    public int getUtilizzoFlossDBMS() {
         return utilizzoFlossDBMS;
     }
 
-    public float getUtilizzoFlossFileServer() {
+    public int getUtilizzoFlossFileServer() {
         return utilizzoFlossFileServer;
     }
 
-    public float getUtilizzoFlossMailServer() {
+    public int getUtilizzoFlossMailServer() {
         return utilizzoFlossMailServer;
     }
 
-    public float getUtilizzoFlossPrinterServer() {
+    public int getUtilizzoFlossPrinterServer() {
         return utilizzoFlossPrinterServer;
     }
 
-    public float getUtilizzoFlossServerDesktopRemoto() {
+    public int getUtilizzoFlossServerDesktopRemoto() {
         return utilizzoFlossServerDesktopRemoto;
     }
 
-    public float getUtilizzoFlossWebServer() {
+    public int getUtilizzoFlossWebServer() {
         return utilizzoFlossWebServer;
     }
 
-    public float getSpesaMediaSoftwarePerAddetto() {
+    public double getSpesaMediaSoftwarePerAddetto() {
         return spesaMediaSoftwarePerAddetto;
     }
 
-    public float getMediaFornitoriICT() {
+    public int getMediaFornitoriICT() {
         return mediaFornitoriICT;
     }
 

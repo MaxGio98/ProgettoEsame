@@ -206,7 +206,7 @@ public class CsvParser {
         scanner.useDelimiter("\n");
         meta = scanner.next();
         this.metaData = meta;
-        System.out.println(meta);
+//        System.out.println(meta);
         while(scanner.hasNext()) {
             data += (scanner.next()+"\n");
         }
@@ -220,9 +220,9 @@ public class CsvParser {
         for(int i=0;i<(dataRighe.length-1);i++)
         {
             String line=dataRighe[i];
-            System.out.println(line);
+//            System.out.println(line);
             String[] dataSplitted = line.split(";");
-            ErossPaProvincia ePP=new ErossPaProvincia(Integer.parseInt(dataSplitted[0]),dataSplitted[1],Integer.parseInt(dataSplitted[2]),Float.parseFloat(dataSplitted[3]),Float.parseFloat(dataSplitted[4]),Float.parseFloat(dataSplitted[5]),Float.parseFloat(dataSplitted[6]),Float.parseFloat(dataSplitted[7]),Float.parseFloat(dataSplitted[8]),Float.parseFloat(dataSplitted[9]),Float.parseFloat(dataSplitted[10]),Float.parseFloat(dataSplitted[11]),Float.parseFloat(dataSplitted[12]),Float.parseFloat(dataSplitted[13]),Float.parseFloat(dataSplitted[14]),Float.parseFloat(dataSplitted[15]),Float.parseFloat(dataSplitted[16]),Float.parseFloat(dataSplitted[17]),Float.parseFloat(dataSplitted[18]),Float.parseFloat(dataSplitted[19]),Float.parseFloat(dataSplitted[20]),Float.parseFloat(dataSplitted[21]),Float.parseFloat(dataSplitted[22]));
+            ErossPaProvincia ePP=new ErossPaProvincia(Integer.parseInt(dataSplitted[0]),dataSplitted[1],Integer.parseInt(dataSplitted[2]),Integer.parseInt(dataSplitted[3]),Integer.parseInt(dataSplitted[4]),Integer.parseInt(dataSplitted[5]),Integer.parseInt(dataSplitted[6]),Integer.parseInt(dataSplitted[7]),Integer.parseInt(dataSplitted[8]),Integer.parseInt(dataSplitted[9]),Integer.parseInt(dataSplitted[10]),Integer.parseInt(dataSplitted[11]),Integer.parseInt(dataSplitted[12]),Integer.parseInt(dataSplitted[13]),Integer.parseInt(dataSplitted[14]),Integer.parseInt(dataSplitted[15]),Integer.parseInt(dataSplitted[16]),Integer.parseInt(dataSplitted[17]),Integer.parseInt(dataSplitted[18]),Integer.parseInt(dataSplitted[19]),Integer.parseInt(dataSplitted[20]),Double.parseDouble(dataSplitted[21]),Integer.parseInt(dataSplitted[22].trim()));
             lista.add(ePP);
         }
         int lastNotRandomId=lista.get(lista.size()-1).getIdTerritorio();
@@ -230,7 +230,7 @@ public class CsvParser {
         for(int i=1;i<=90;i++)
         {
             String randomPro= "terr.prov. di "+(char)(r.nextInt(90-65)+65)+(char)(r.nextInt(90-65)+65);
-            ErossPaProvincia ePP=new ErossPaProvincia(lastNotRandomId+i,randomPro,2008,r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100),r.nextFloat()*(100));
+            ErossPaProvincia ePP=new ErossPaProvincia(lastNotRandomId+i,randomPro,2008,r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),Math.floor((r.nextDouble()*(500))*Math.pow(10,7))/Math.pow(10,7),r.nextInt(10));
             lista.add(ePP);
         }
 //        for(int i=0;i<lista.size();i++)
