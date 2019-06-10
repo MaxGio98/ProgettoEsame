@@ -3,6 +3,7 @@ package com.dagomiliano.progettoesame.controller;
 import com.dagomiliano.progettoesame.model.ErossPaProvincia;
 import com.dagomiliano.progettoesame.model.ErossPaProvinciaService;
 import com.dagomiliano.progettoesame.model.Stats;
+import com.dagomiliano.progettoesame.utils.Filter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,14 +35,15 @@ public class ErossPaProvinciaController {
         return ePP.getAll();
     }
 
-//    @GetMapping("/floss/{stat}/{campo}")
-//    public Map getAvg(@PathVariable String stat, @PathVariable String campo) {
-//        return ePP.getStats(stat, campo);
-//    }
-
     @GetMapping("stats/{field}")
     public Stats getStats(@PathVariable String field) {
         return ePP.getStats(field);
+    }
+
+    @GetMapping("floss/{field}/{filter}/{value}")
+    public List<ErossPaProvincia> filter(@PathVariable String field, @PathVariable String filter, @PathVariable int value) {
+        Filter f = new Filter(filter);
+        return f.filtering(field, value);
     }
 
 }

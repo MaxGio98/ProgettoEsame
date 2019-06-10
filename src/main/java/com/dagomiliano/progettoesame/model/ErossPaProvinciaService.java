@@ -1,13 +1,12 @@
 package com.dagomiliano.progettoesame.model;
 
+import com.dagomiliano.progettoesame.utils.CsvParser;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @Component
@@ -22,7 +21,7 @@ public class ErossPaProvinciaService {
         provincias = p.getList();
     }
 
-    public List<ErossPaProvincia> getDatas() {
+    public static List<ErossPaProvincia> getDatas() {
         return provincias;
     }
 
