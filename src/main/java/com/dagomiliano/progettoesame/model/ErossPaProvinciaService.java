@@ -1,12 +1,13 @@
 package com.dagomiliano.progettoesame.model;
 
-import com.dagomiliano.progettoesame.utils.CsvParser;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+
+//import com.dagomiliano.progettoesame.utils.CsvParser;
 
 
 @Component
@@ -16,7 +17,7 @@ public class ErossPaProvinciaService {
 
     {
         // Inizializza i dati
-        CsvParser p = new CsvParser();
+        com.dagomiliano.progettoesame.model.CsvParser p = new com.dagomiliano.progettoesame.model.CsvParser();
         p.checkSER();
         provincias = p.getList();
     }

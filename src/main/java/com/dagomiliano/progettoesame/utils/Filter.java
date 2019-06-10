@@ -29,29 +29,6 @@ public class Filter {
         }
     }
 
-//    private List<ErossPaProvincia> bt(String field, int[] param) {
-//        try {
-//            Method code = ErossPaProvincia.class.getMethod("get" + field.substring(0, 1).toUpperCase() + field.substring(1));
-//            List<ErossPaProvincia> list = new ArrayList<>();
-//            for (ErossPaProvincia obj : ErossPaProvinciaService.getDatas()) {
-//                int temp = (int) code.invoke(obj);
-//                if (temp > param[0] && temp < param[1]) list.add(obj);
-//            }
-//            return list;
-//        } catch (NoSuchMethodException e) {
-//            e.printStackTrace();
-//            return null;
-//        } catch (SecurityException e) {
-//            e.printStackTrace();
-//            return null;
-//        } catch (IllegalAccessException e) {
-//            e.printStackTrace();
-//            return null;
-//        } catch (InvocationTargetException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
 
     public List<ErossPaProvincia> gr(String field, int param) {
         try {
