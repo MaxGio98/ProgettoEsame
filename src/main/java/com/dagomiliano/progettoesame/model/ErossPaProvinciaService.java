@@ -37,19 +37,15 @@ public class ErossPaProvinciaService {
     }
 
     public ErossPaProvincia getDatoByProvincia(String prov) {
-        if (prov.equals("ER")) {
-            return provincias.get(provincias.size()-1);
-        } else {
-            String provTemp = "terr.prov. di " + prov;
-            for (ErossPaProvincia obj : provincias) {
-                if (obj.getTerritorio().equals(provTemp)){
-                    return obj;
-                }
+        String provTemp = "terr.prov. di " + prov;
+        for (ErossPaProvincia obj : provincias) {
+            if (obj.getTerritorio().equals(provTemp)){
+                return obj;
             }
-            System.out.println("Parametro non corretto");
-            ErossPaProvincia err=new ErossPaProvincia(0,"ERRORE PROVINCIA INSERITA",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-            return err;
         }
+        System.out.println("Parametro non corretto");
+        ErossPaProvincia err=new ErossPaProvincia(0,"ERRORE PROVINCIA INSERITA",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+        return err;
     }
 
     public List<ErossPaProvincia> getAll() {
