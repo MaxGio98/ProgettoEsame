@@ -3,6 +3,7 @@ package com.dagomiliano.progettoesame.model;
 import org.springframework.boot.json.BasicJsonParser;
 import java.lang.*;
 import java.io.*;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -59,7 +60,8 @@ public class CsvParser {
      */
     public void checkSER()
     {
-        String data;
+//        String data;
+        List<List<String>> record=new ArrayList<>();
 
         File findSer=new File("lista.ser");
         if(findSer.exists())
@@ -83,8 +85,8 @@ public class CsvParser {
         {
             String url=parseJSON("https://www.dati.gov.it/api/3/action/package_show?id=42063df0-49ed-438a-91d4-fca8074166c4");
             File zipFile = downloadZIP(url, this.nomeZIP);
-            data = finderInZIP(zipFile, "EROSS_PA/EROSS_PA_PROVINCIA.csv");
-            parseCSV(data);
+            record = finderInZIP(zipFile, "EROSS_PA/EROSS_PA_PROVINCIA.csv");
+            parseCSV(record);
         }
     }
 
@@ -169,19 +171,37 @@ public class CsvParser {
      * @param searchFile    nome del File .csv di interesse
      * @return      Stringa contenente i dati contenuti nel file .csv
      */
-    public String finderInZIP(File zipFileIn, String searchFile) {
+
+
+    public List<List<String>> finderInZIP(File zipFileIn, String searchFile) {
         try {
             ZipFile zipFile = new ZipFile(zipFileIn);
             ZipEntry entry = zipFile.getEntry(searchFile);
             InputStream input = zipFile.getInputStream(entry);
             BufferedReader br = new BufferedReader(new InputStreamReader(input));
-            String data="";
+            List<List<String>> records = new ArrayList<>();
             String line;
-            while((line = br.readLine()) != null) {
-                data += line + ";" +"\n";
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(";");
+                records.add(Arrays.asList(values));
+            }
+            for(int i=1;i<records.size();i++)
+            {
+                for(int j=0;j<records.get(i).size();j++)
+                {
+                    if(records.get(i).get(j).endsWith("%"))
+                    {
+                        records.get(i).set(j,records.get(i).get(j).replace("%",""));
+
+                    }
+                    if(records.get(i).get(j).contains(","))
+                    {
+                        records.get(i).set(j,records.get(i).get(j).replace(",","."));
+                    }
+                }
             }
             zipFile.close();
-            return data;
+            return records;
         } catch(ZipException e) {
             e.printStackTrace();
             return null;
@@ -191,39 +211,25 @@ public class CsvParser {
         }
     }
 
+
     /**
      * Il metodo parseCSV si occupa del parsing dei dati contenuti in unsa stringa (ottenuti dal csv di interesse),
      * della creazione del file .ser contenente gli oggetti ,ottenuti dal parsing, e della cancellazione dalla memoria
      * del file .zip di partenza
      *
-     * @param dati      Stringa contenente i dati di partenza per la creazione degli oggetti che modellano
+     * @param records      Stringa contenente i dati di partenza per la creazione degli oggetti che modellano
      *                  i dati di interesse.
      */
 
-    public void parseCSV(String dati) {
-        String meta, data="";
-        Scanner scanner = new Scanner(dati);
-        scanner.useDelimiter("\n");
-        meta = scanner.next();
-        this.metaData = meta;
-//        System.out.println(meta);
-        while(scanner.hasNext()) {
-            data += (scanner.next()+"\n");
-        }
-        this.data = data;
-        //System.out.println(data);
-        data = data.replaceAll("%", "");
-        data=data.replaceAll(",",".");
-        data = data.replace("2.008","2008");
-        String[] dataRighe=data.split("\n");
-        String[] metaSplitted = meta.split(";");
-        for(int i=0;i<(dataRighe.length-1);i++)
+    public void parseCSV(List<List<String>> records) {
+//        String[] meta=new String[records.get(0).size()];
+//        for(int i=0;i<records.get(0).size()-1;i++)
+//        meta[i]=records.get(0).get(i);
+        records.remove(0);
+        for(int i=0;i<records.size()-1;i++)
         {
-            String line=dataRighe[i];
-//            System.out.println(line);
-            String[] dataSplitted = line.split(";");
-            ErossPaProvincia ePP=new ErossPaProvincia(Integer.parseInt(dataSplitted[0]),dataSplitted[1],Integer.parseInt(dataSplitted[2]),Integer.parseInt(dataSplitted[3]),Integer.parseInt(dataSplitted[4]),Integer.parseInt(dataSplitted[5]),Integer.parseInt(dataSplitted[6]),Integer.parseInt(dataSplitted[7]),Integer.parseInt(dataSplitted[8]),Integer.parseInt(dataSplitted[9]),Integer.parseInt(dataSplitted[10]),Integer.parseInt(dataSplitted[11]),Integer.parseInt(dataSplitted[12]),Integer.parseInt(dataSplitted[13]),Integer.parseInt(dataSplitted[14]),Integer.parseInt(dataSplitted[15]),Integer.parseInt(dataSplitted[16]),Integer.parseInt(dataSplitted[17]),Integer.parseInt(dataSplitted[18]),Integer.parseInt(dataSplitted[19]),Integer.parseInt(dataSplitted[20]),Double.parseDouble(dataSplitted[21]),Integer.parseInt(dataSplitted[22].trim()));
-            lista.add(ePP);
+                ErossPaProvincia ePP=new ErossPaProvincia(Integer.parseInt(records.get(i).get(0)),records.get(i).get(1),Integer.parseInt(records.get(i).get(2)),Integer.parseInt(records.get(i).get(3)),Integer.parseInt(records.get(i).get(4)),Integer.parseInt(records.get(i).get(5)),Integer.parseInt(records.get(i).get(6)),Integer.parseInt(records.get(i).get(7)),Integer.parseInt(records.get(i).get(8)),Integer.parseInt(records.get(i).get(9)),Integer.parseInt(records.get(i).get(10)),Integer.parseInt(records.get(i).get(11)),Integer.parseInt(records.get(i).get(12)),Integer.parseInt(records.get(i).get(13)),Integer.parseInt(records.get(i).get(14)),Integer.parseInt(records.get(i).get(15)),Integer.parseInt(records.get(i).get(16)),Integer.parseInt(records.get(i).get(17)),Integer.parseInt(records.get(i).get(18)),Integer.parseInt(records.get(i).get(19)),Integer.parseInt(records.get(i).get(20)),Double.parseDouble(records.get(i).get(21)),Integer.parseInt(records.get(i).get(22).trim()));
+                lista.add(ePP);
         }
         int lastNotRandomId=lista.get(lista.size()-1).getIdTerritorio();
         Random r=new Random();
@@ -233,10 +239,6 @@ public class CsvParser {
             ErossPaProvincia ePP=new ErossPaProvincia(lastNotRandomId+i,randomPro,2008,r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),Math.floor((r.nextDouble()*(500))*Math.pow(10,7))/Math.pow(10,7),r.nextInt(10));
             lista.add(ePP);
         }
-//        for(int i=0;i<lista.size();i++)
-//        {
-//            System.out.println(lista.get(i));
-//        }
         try {
             FileOutputStream fileOut = new FileOutputStream("lista.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
