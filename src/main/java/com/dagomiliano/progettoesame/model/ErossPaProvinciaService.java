@@ -135,7 +135,6 @@ public class ErossPaProvinciaService {
             {
                 for(int i=1;i<provincias.size()-2;i++)
                 {
-                    count=1;
                     if(!(check.contains(provincias.get(i).getTerritorio())))
                     {
                         Stats obj=new Stats(provincias.get(i).getTerritorio());
@@ -143,7 +142,7 @@ public class ErossPaProvinciaService {
                         {
                             if(obj.getField().equals(provincias.get(j).getTerritorio()))
                             {
-                                count+=1;
+                                count=obj.getCount()+1;
                             }
                         }
                         obj.setCount(count);
