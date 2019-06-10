@@ -20,6 +20,11 @@ public class Stats {
         this.count = count;
     }
 
+    public Stats(String elem)
+    {
+        this.field=elem;
+    }
+
     public String getField() {
         return field;
     }
@@ -47,4 +52,9 @@ public class Stats {
     public int getCount() {
         return count;
     }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
 }
