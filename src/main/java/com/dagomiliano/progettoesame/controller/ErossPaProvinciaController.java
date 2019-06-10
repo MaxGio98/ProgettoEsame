@@ -2,6 +2,7 @@ package com.dagomiliano.progettoesame.controller;
 
 import com.dagomiliano.progettoesame.model.ErossPaProvincia;
 import com.dagomiliano.progettoesame.model.ErossPaProvinciaService;
+import com.dagomiliano.progettoesame.model.Stats;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,9 +34,14 @@ public class ErossPaProvinciaController {
         return ePP.getAll();
     }
 
-    @GetMapping("/floss/avg")
-    public Map getAvg() {
-        return ePP.avg();
+//    @GetMapping("/floss/{stat}/{campo}")
+//    public Map getAvg(@PathVariable String stat, @PathVariable String campo) {
+//        return ePP.getStats(stat, campo);
+//    }
+
+    @GetMapping("stats/{field}")
+    public Stats getStats(@PathVariable String field) {
+        return ePP.getStats(field);
     }
 
 }
