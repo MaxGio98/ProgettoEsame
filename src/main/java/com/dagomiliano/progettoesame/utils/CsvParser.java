@@ -1,9 +1,9 @@
-package com.dagomiliano.progettoesame.model;
+package com.dagomiliano.progettoesame.utils;
 
+import com.dagomiliano.progettoesame.model.ErossPaProvincia;
 import org.springframework.boot.json.BasicJsonParser;
 import java.lang.*;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -226,6 +226,7 @@ public class CsvParser {
 //        for(int i=0;i<records.get(0).size()-1;i++)
 //        meta[i]=records.get(0).get(i);
         records.remove(0);
+
         for(int i=0;i<records.size()-1;i++)
         {
                 ErossPaProvincia ePP=new ErossPaProvincia(Integer.parseInt(records.get(i).get(0)),records.get(i).get(1),Integer.parseInt(records.get(i).get(2)),Integer.parseInt(records.get(i).get(3)),Integer.parseInt(records.get(i).get(4)),Integer.parseInt(records.get(i).get(5)),Integer.parseInt(records.get(i).get(6)),Integer.parseInt(records.get(i).get(7)),Integer.parseInt(records.get(i).get(8)),Integer.parseInt(records.get(i).get(9)),Integer.parseInt(records.get(i).get(10)),Integer.parseInt(records.get(i).get(11)),Integer.parseInt(records.get(i).get(12)),Integer.parseInt(records.get(i).get(13)),Integer.parseInt(records.get(i).get(14)),Integer.parseInt(records.get(i).get(15)),Integer.parseInt(records.get(i).get(16)),Integer.parseInt(records.get(i).get(17)),Integer.parseInt(records.get(i).get(18)),Integer.parseInt(records.get(i).get(19)),Integer.parseInt(records.get(i).get(20)),Double.parseDouble(records.get(i).get(21)),Integer.parseInt(records.get(i).get(22).trim()));
@@ -233,14 +234,14 @@ public class CsvParser {
         }
         int lastNotRandomId=lista.get(lista.size()-1).getIdTerritorio();
         Random r=new Random();
-//        for(int i=1;i<=90;i++)
-//        {
-//            String randomPro= "terr.prov. di "+(char)(r.nextInt(90-65)+65)+(char)(r.nextInt(90-65)+65);
-//            ErossPaProvincia ePP=new ErossPaProvincia(lastNotRandomId+i,randomPro,2008,r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),Math.floor((r.nextDouble()*(500))*Math.pow(10,7))/Math.pow(10,7),r.nextInt(10));
-//            lista.add(ePP);
-//        }
-        ErossPaProvincia ePP=new ErossPaProvincia(500,"terr.prov. di PC",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-        lista.add(ePP);
+
+        for(int i=1;i<=90;i++)
+        {
+            String randomPro= "terr.prov. di "+(char)(r.nextInt(90-65)+65)+(char)(r.nextInt(90-65)+65);
+            ErossPaProvincia ePP=new ErossPaProvincia(lastNotRandomId+i,randomPro,2008,r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),r.nextInt(100),Math.floor((r.nextDouble()*(500))*Math.pow(10,7))/Math.pow(10,7),r.nextInt(10));
+            lista.add(ePP);
+        }
+
         try {
             FileOutputStream fileOut = new FileOutputStream("lista.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);

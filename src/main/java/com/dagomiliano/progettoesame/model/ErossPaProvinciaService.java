@@ -6,8 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-
-//import com.dagomiliano.progettoesame.utils.CsvParser;
+import com.dagomiliano.progettoesame.utils.CsvParser;
 
 
 @Component
@@ -17,7 +16,7 @@ public class ErossPaProvinciaService {
 
     {
         // Inizializza i dati
-        com.dagomiliano.progettoesame.model.CsvParser p = new com.dagomiliano.progettoesame.model.CsvParser();
+        CsvParser p = new CsvParser();
         p.checkSER();
         provincias = p.getList();
     }
@@ -79,95 +78,80 @@ public class ErossPaProvinciaService {
 
     public Stats getStats(String field) {
 
-        if(field.equals("territorio")||field.equals("Territorio"))
-        {
-            return this.counterStringheUguali().get(0);
-        }
-        else
-        {
-            int sum = 0;
-            double avg = this.media(field);
-            double devStd = 0;
-            int max;
-            int min;
-            try {
-                Method code = ErossPaProvincia.class.getMethod("get" + field.substring(0, 1).toUpperCase() + field.substring(1));
-                max = (int) code.invoke(provincias.get(0));
-                min = (int) code.invoke(provincias.get(0));
+        int sum = 0;
+        double avg = this.media(field);
+        double devStd = 0;
+        int max;
+        int min;
+        try {
+            Method code = ErossPaProvincia.class.getMethod("get" + field.substring(0, 1).toUpperCase() + field.substring(1));
+            max = (int) code.invoke(provincias.get(0));
+            min = (int) code.invoke(provincias.get(0));
 
-                for (ErossPaProvincia obj : provincias) {
-                    int temp = (int) code.invoke(obj);
-                    sum += temp;
-                    devStd += (temp - avg) * (temp - avg);
-                    if (temp > max) max = temp;
-                    if (temp < min) min = temp;
-                }
-                devStd = Math.sqrt(devStd)/this.provincias.size();
-
-                Stats ret = new Stats(field, avg, devStd, max, min, sum, provincias.size());
-                return ret;
-
-            } catch (NoSuchMethodException e)  {
-                e.printStackTrace();
-                return null;
-            } catch (SecurityException e) {
-                e.printStackTrace();
-                return null;
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-                return null;
+            for (ErossPaProvincia obj : provincias) {
+                int temp = (int) code.invoke(obj);
+                sum += temp;
+                devStd += (temp - avg) * (temp - avg);
+                if (temp > max) max = temp;
+                if (temp < min) min = temp;
             }
+            devStd = Math.sqrt(devStd)/this.provincias.size();
 
+            Stats ret = new Stats(field, avg, devStd, max, min, sum, provincias.size());
+            return ret;
+
+        } catch (NoSuchMethodException e)  {
+            e.printStackTrace();
+            return null;
+        } catch (SecurityException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+            return null;
         }
+
         return null;
     }
 
-    public List<Stats> counterStringheUguali()
-    {
-        List<Stats> trovato=new ArrayList<>();
-        List<String> check=new ArrayList<>();
-        boolean flag=false;
-        int count=0;
-        do {
-            if(trovato.size()!=0)
-            {
-                for(int i=1;i<provincias.size()-2;i++)
-                {
-                    if(!(check.contains(provincias.get(i).getTerritorio())))
-                    {
-                        Stats obj=new Stats(provincias.get(i).getTerritorio());
-                        for(int j=i+1;j<provincias.size()-1;j++)
-                        {
-                            if(obj.getField().equals(provincias.get(j).getTerritorio()))
-                            {
-                                count=obj.getCount()+1;
+    public List<StringCount> stringCounter() {
+        List<StringCount> ret = new ArrayList<>();
+        List<String> check = new ArrayList<>();
+        int counter = 1;
+        boolean flag = true;
+
+        while(flag) {
+            if (ret.size() == 0) {
+                StringCount n = new StringCount(this.provincias.get(0).getTerritorio());
+                for (int i = 1; i < provincias.size(); i++) {
+                    if (n.getField().equals(this.provincias.get(i).getTerritorio())) {
+                        counter = counter + 1;
+                    }
+                }
+                n.setCount(counter);
+                ret.add(n);
+                check.add(n.getField());
+            } else {
+                for (int i = 1; i < this.provincias.size() - 1; i++) {
+                    if (!(check.contains(this.provincias.get(i).getTerritorio()))) {
+                        StringCount n = new StringCount(this.provincias.get(i).getTerritorio());
+                        counter = 1;
+                        for (int j = i + 1; j < this.provincias.size(); j++) {
+                            if (n.getField().equals(this.provincias.get(j).getTerritorio())) {
+                                counter = counter + 1;
                             }
                         }
-                        obj.setCount(count);
-                        check.add(obj.getField());
-                        trovato.add(obj);
+                        n.setCount(counter);
+                        ret.add(n);
+                        check.add(n.getField());
                     }
                 }
-                flag=true;
+                flag = false;
             }
-            else
-            {
-                Stats obj=new Stats(provincias.get(0).getTerritorio());
-                for(int i=0;i<provincias.size()-1;i++)
-                {
-                    if(obj.getField().equals(provincias.get(i).getTerritorio()))
-                    {
-                        count++;
-                    }
-                }
-                obj.setCount(count);
-                check.add(obj.getField());
-                trovato.add(obj);
-            }
-        }while(flag==false);
-        return trovato;
+        };
+        return ret;
     }
 
    // END SERVICE

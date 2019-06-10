@@ -3,6 +3,7 @@ package com.dagomiliano.progettoesame.controller;
 import com.dagomiliano.progettoesame.model.ErossPaProvincia;
 import com.dagomiliano.progettoesame.model.ErossPaProvinciaService;
 import com.dagomiliano.progettoesame.model.Stats;
+import com.dagomiliano.progettoesame.model.StringCount;
 import com.dagomiliano.progettoesame.utils.Filter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +39,11 @@ public class ErossPaProvinciaController {
     @GetMapping("stats/{field}")
     public Stats getStats(@PathVariable String field) {
         return ePP.getStats(field);
+    }
+
+    @GetMapping("count")
+    public List<StringCount> getCount() {
+        return ePP.stringCounter();
     }
 
     @GetMapping("floss/{field}/{filter}/{value}")
