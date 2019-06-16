@@ -13,7 +13,6 @@ import com.dagomiliano.progettoesame.utils.CsvParser;
 public class ErossPaProvinciaService {
 
     private static List<ErossPaProvincia> provincias = new ArrayList<>();
-
     {
         // Inizializza i dati
         CsvParser p = new CsvParser();
@@ -150,7 +149,7 @@ public class ErossPaProvinciaService {
                 }
                 flag = false;
             }
-        };
+        }
         return ret;
     }
 

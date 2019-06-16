@@ -29,31 +29,31 @@ public class CsvParser {
      * Stringa contenente il nome del file .zip da visitare
      */
     private String nomeZIP="EROSS_PA_PROVINCIA.zip";
-    /**
-     * Stringa contenente i metadati derivati dal csv
-     */
-    private String metaData;
-    /**
-     * Stringa contenente i dati derivati dal csv
-     */
-    private String data;
-
-    // END PARAMETERS
-
-    public String getData() {
-        return this.data;
-    }
-
-    public String getMetaData() {
-        return this.metaData;
-    }
+//    /**
+//     * Stringa contenente i metadati derivati dal csv
+//     */
+//    private String metaData;
+//    /**
+//     * Stringa contenente i dati derivati dal csv
+//     */
+//    private String data;
+//
+//    // END PARAMETERS
+//
+//    public String getData() {
+//        return this.data;
+//    }
+//
+//    public String getMetaData() {
+//        return this.metaData;
+//    }
 
     public List<ErossPaProvincia> getList() {
         return this.lista;
     }
 
     /**
-     * Il metodo checkSER controlla che il file .ser contenente gli Oggetti ottenuti dal parsing
+     * Il metodo checkSER controlla che il file .ser, contenente gli Oggetti ottenuti dal parsing,
      * esista all'interno della cartella principale del progetto.
      * In tal caso carica gli oggetti contenuti nel file .ser all'interno della lista.
      * Altrimenti l'applicazione si trova al suo primo avvio per cui procede al download dei file e al parsing.
@@ -61,8 +61,6 @@ public class CsvParser {
     public void checkSER()
     {
 //        String data;
-        List<List<String>> record=new ArrayList<>();
-
         File findSer=new File("lista.ser");
         if(findSer.exists())
         {
@@ -83,6 +81,7 @@ public class CsvParser {
         }
         else
         {
+            List<List<String>> record;
             String url=parseJSON("https://www.dati.gov.it/api/3/action/package_show?id=42063df0-49ed-438a-91d4-fca8074166c4");
             File zipFile = downloadZIP(url, this.nomeZIP);
             record = finderInZIP(zipFile, "EROSS_PA/EROSS_PA_PROVINCIA.csv");
@@ -91,7 +90,7 @@ public class CsvParser {
     }
 
     /**
-     * Il metodo parseJson si occupa del parsing del file json dall'url che lo contiene.
+     * Il metodo parseJSON si occupa del parsing del file json dall'url che lo contiene.
      * Il parsing del file è assegnato alla classe BasicJsonParser contenuta nelle librerie Spring.
      * La visita della struttura dati ottenuta dal parsing è svolta attraverso i metodi della calsse Map.
      *
@@ -133,7 +132,7 @@ public class CsvParser {
     }
 
     /**
-     * Il metodo downloadZip si occupa del download del file .zip a partire dall'url che lo contiene
+     * Il metodo downloadZIP si occupa del download del file .zip a partire dall'url che lo contiene
      *
      * @param inUrl     url contenente il file .zip
      * @param ZIPname   nome con cui il file scaricato verrà salvato in memoria
@@ -164,8 +163,8 @@ public class CsvParser {
     }
 
     /**
-     * Il metodo finderInZip si occupa della visita del file .zip scaricato precedentemente
-     * restituendo una Stringa contenente tutti i dati contenuti nel file .csv di interesse.
+     * Il metodo finderInZIP si occupa della visita del file .zip scaricato precedentemente
+     * restituendo una lista contenente tutti i dati contenuti nel file .csv di interesse.
      *
      * @param zipFileIn     File .zip da visitare
      * @param searchFile    nome del File .csv di interesse
@@ -213,11 +212,14 @@ public class CsvParser {
 
 
     /**
-     * Il metodo parseCSV si occupa del parsing dei dati contenuti in unsa stringa (ottenuti dal csv di interesse),
-     * della creazione del file .ser contenente gli oggetti ,ottenuti dal parsing, e della cancellazione dalla memoria
-     * del file .zip di partenza
+     * Il metodo parseCSV si occupa del parsing dei dati contenuti in una lista (ottenuti dal csv di interesse), della
+     * creazione casuale di 90 elementi, come richiesto dal prof. Mancini, poiché il dataset a noi assegnato contiene
+     * solo 10 osservazioni.
+     * Inoltre il metodo parseCSV si occupa della creazione del file .ser contenente gli oggetti ,ottenuti dal parsing
+     * e dalla generazione randomica.
+     * Dopo aver generato il file .ser il metodo effettua la cancellazione dalla memoria il file .zip di partenza.
      *
-     * @param records      Stringa contenente i dati di partenza per la creazione degli oggetti che modellano
+     * @param records      Lista contenente i dati di partenza per la creazione degli oggetti che modellano
      *                  i dati di interesse.
      */
 
