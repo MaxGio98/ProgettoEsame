@@ -1,5 +1,4 @@
 package com.dagomiliano.progettoesame.controller;
-
 import com.dagomiliano.progettoesame.model.ErossPaProvincia;
 import com.dagomiliano.progettoesame.model.ErossPaProvinciaService;
 import com.dagomiliano.progettoesame.model.Stats;
@@ -7,10 +6,8 @@ import com.dagomiliano.progettoesame.model.StringCount;
 import com.dagomiliano.progettoesame.utils.Filter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class ErossPaProvinciaController {
@@ -37,7 +34,10 @@ public class ErossPaProvinciaController {
 
     @GetMapping("stats/{field}")
     public Stats getStats(@PathVariable String field) {
-        return ePP.getStats(field);
+        return ePP.getStats(field,ePP.getDatas());
+    }
+    public Stats getStats(@PathVariable String field,List<ErossPaProvincia> lista) {
+        return ePP.getStats(field,lista);
     }
 
     @GetMapping("/count")
@@ -51,10 +51,15 @@ public class ErossPaProvinciaController {
         return f.filtering(field, value);
     }
 
+    @GetMapping("/get/filter/stats")
+    public Stats statsfilter(@RequestParam("field") String field, @RequestParam("filter") String filter, @RequestParam("value") int value)
+    {
+        List<ErossPaProvincia> lista= this.filter(field, filter, value);
+        return getStats(field,lista);
+    }
+
     @GetMapping("/get/metadata")
     public Collection getMetadata() {
         return ePP.getMetadata();
     }
-
-
 }

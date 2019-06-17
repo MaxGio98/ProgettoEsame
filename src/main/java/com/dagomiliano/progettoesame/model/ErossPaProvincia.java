@@ -88,12 +88,6 @@ public class ErossPaProvincia implements Serializable {
         this.mediaFornitoriICT = mediaFornitoriICT;
     }
 
-
-
-
-
-
-
     public int getIdTerritorio() {
         return idTerritorio;
     }
@@ -101,13 +95,6 @@ public class ErossPaProvincia implements Serializable {
     public String getTerritorio() {
         return territorio;
     }
-
-
-
-
-
-
-
 
     //Getters
 

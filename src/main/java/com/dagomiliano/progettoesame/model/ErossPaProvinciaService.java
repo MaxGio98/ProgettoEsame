@@ -1,15 +1,18 @@
 package com.dagomiliano.progettoesame.model;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import com.dagomiliano.progettoesame.utils.CsvParser;
 import com.dagomiliano.progettoesame.model.MetaData;
+import org.springframework.web.server.ResponseStatusException;
 
 
 @Component
@@ -36,8 +39,7 @@ public class ErossPaProvinciaService {
                 return obj;
             }
         }
-        ErossPaProvincia err=new ErossPaProvincia(0,"ERRORE ID INSERITO",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-        return err;
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Errore nei dati inseriti");
     }
 
     public ErossPaProvincia getDatoByProvincia(String prov) {
@@ -47,9 +49,7 @@ public class ErossPaProvinciaService {
                 return obj;
             }
         }
-        System.out.println("Parametro non corretto");
-        ErossPaProvincia err=new ErossPaProvincia(0,"ERRORE PROVINCIA INSERITA",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-        return err;
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Errore nei dati inseriti");
     }
 
     public List<ErossPaProvincia> getAll() {
@@ -57,18 +57,18 @@ public class ErossPaProvinciaService {
     }
 
 
-    public double media(String campo) {
-        int avg = 0;
+    public double media(String campo, List<ErossPaProvincia>lista) {
+        double avg = 0;
         try {
             Method code = ErossPaProvincia.class.getMethod("get" + campo.substring(0, 1).toUpperCase() + campo.substring(1));
-            for (ErossPaProvincia obj : provincias) {
-                avg += (int) code.invoke(obj);
-            }
-            avg /= this.provincias.size();
+            for (ErossPaProvincia obj : lista) {
+                avg+=((Number)code.invoke(obj)).doubleValue();
+           }
+            avg /= lista.size();
             return avg;
         } catch (NoSuchMethodException e)  {
             e.printStackTrace();
-            return 0;
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Errore nei dati inseriti");
         } catch (SecurityException e) {
             e.printStackTrace();
             return 0;
@@ -81,28 +81,28 @@ public class ErossPaProvinciaService {
         }
     }
 
-    public Stats getStats(String field) {
-
-        int sum = 0;
-        double avg = this.media(field);
+    public Stats getStats(String field, List<ErossPaProvincia> lista) {
+        double sum = 0;
+        double avg = this.media(field,lista);
         double devStd = 0;
-        int max;
-        int min;
+        double max;
+        double min;
+
         try {
             Method code = ErossPaProvincia.class.getMethod("get" + field.substring(0, 1).toUpperCase() + field.substring(1));
-            max = (int) code.invoke(provincias.get(0));
-            min = (int) code.invoke(provincias.get(0));
+            max = ((Number) code.invoke(lista.get(0))).doubleValue();
+            min = ((Number) code.invoke(lista.get(0))).doubleValue();
 
-            for (ErossPaProvincia obj : provincias) {
-                int temp = (int) code.invoke(obj);
+            for (ErossPaProvincia obj : lista) {
+                double temp = ((Number) code.invoke(obj)).doubleValue();
                 sum += temp;
                 devStd += (temp - avg) * (temp - avg);
                 if (temp > max) max = temp;
                 if (temp < min) min = temp;
             }
-            devStd = Math.sqrt(devStd)/this.provincias.size();
+            devStd = Math.sqrt(devStd)/lista.size();
 
-            Stats ret = new Stats(field, avg, devStd, max, min, sum, provincias.size());
+            Stats ret = new Stats(field, avg, devStd, max, min, sum, lista.size());
             return ret;
 
         } catch (NoSuchMethodException e)  {
@@ -159,26 +159,6 @@ public class ErossPaProvinciaService {
         return ret;
     }
 
-//    public Collection getMetadata() {
-//        List<Object> metaRet = new ArrayList<>();
-//        Field[] field = ErossPaProvincia.class.getDeclaredFields();
-//        Object temp;
-//
-//        for(Field o : field) {
-//            MetaData newMeta = new MetaData();
-//            newMeta.setAlias(o.getName());
-//            newMeta.setType(o.getType().getSimpleName());
-//            metaRet.add(newMeta);
-//        }
-//
-//        for (int i = 0; i < this.meta.length; i++) {
-//            temp = metaRet.get(i);
-//            if(temp instanceof MetaData) {
-//                ((MetaData) temp).setSourceField(this.meta[i]);
-//            }
-//        }
-//        return metaRet;
-//    }
 
     public Collection getMetadata() {
         List<MetaData> metaRet = new ArrayList<>();
@@ -196,6 +176,5 @@ public class ErossPaProvinciaService {
         }
         return metaRet;
     }
-
    // END SERVICE
 }

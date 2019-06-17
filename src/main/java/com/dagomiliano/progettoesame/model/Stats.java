@@ -5,12 +5,12 @@ public class Stats {
     private String field;
     private double avg;
     private double devStd;
-    private int max;
-    private int min;
-    private int sum;
+    private double max;
+    private double min;
+    private double sum;
     private int count;
 
-    public Stats(String field, double avg, double devStd, int max, int min, int sum, int count) {
+    public Stats(String field, double avg, double devStd, double max, double min, double sum, int count) {
         this.field = field;
         this.avg = avg;
         this.devStd = devStd;
@@ -37,15 +37,15 @@ public class Stats {
         return devStd;
     }
 
-    public int getMax() {
+    public double getMax() {
         return max;
     }
 
-    public int getMin() {
+    public double getMin() {
         return min;
     }
 
-    public int getSum() {
+    public double getSum() {
         return sum;
     }
 
