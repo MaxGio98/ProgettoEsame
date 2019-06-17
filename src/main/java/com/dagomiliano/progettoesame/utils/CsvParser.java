@@ -36,13 +36,13 @@ public class CsvParser {
     /**
      * Stringa contenente i dati derivati dal csv
      */
-    private String data;
-
-    // END PARAMETERS
-
-    public String getData() {
-        return this.data;
-    }
+//    private String data;
+//
+//    // END PARAMETERS
+//
+//    public String getData() {
+//        return this.data;
+//    }
 
     public String[] getMetaData() {
         return this.metaData;
@@ -62,7 +62,8 @@ public class CsvParser {
     {
 //        String data;
         File findSer=new File("lista.ser");
-        if(findSer.exists())
+        File findMetaSer=new File("meta.ser");
+        if(findSer.exists()&&findMetaSer.exists())
         {
             try {
                 FileInputStream fileIn = new FileInputStream("lista.ser");
@@ -70,6 +71,10 @@ public class CsvParser {
                 lista = (List<ErossPaProvincia>) in.readObject();
                 in.close();
                 fileIn.close();
+                FileInputStream metaIn=new FileInputStream("meta.ser");
+                ObjectInputStream metaInStream=new ObjectInputStream(metaIn);
+                metaData=(String[]) metaInStream.readObject();
+                metaInStream.close();
             } catch (IOException i) {
                 i.printStackTrace();
                 return;
@@ -232,6 +237,7 @@ public class CsvParser {
 
         this.metaData = meta;
 
+
         for(int i=0;i<records.size()-1;i++)
         {
                 ErossPaProvincia ePP=new ErossPaProvincia(Integer.parseInt(records.get(i).get(0)),records.get(i).get(1),Integer.parseInt(records.get(i).get(2)),Integer.parseInt(records.get(i).get(3)),Integer.parseInt(records.get(i).get(4)),Integer.parseInt(records.get(i).get(5)),Integer.parseInt(records.get(i).get(6)),Integer.parseInt(records.get(i).get(7)),Integer.parseInt(records.get(i).get(8)),Integer.parseInt(records.get(i).get(9)),Integer.parseInt(records.get(i).get(10)),Integer.parseInt(records.get(i).get(11)),Integer.parseInt(records.get(i).get(12)),Integer.parseInt(records.get(i).get(13)),Integer.parseInt(records.get(i).get(14)),Integer.parseInt(records.get(i).get(15)),Integer.parseInt(records.get(i).get(16)),Integer.parseInt(records.get(i).get(17)),Integer.parseInt(records.get(i).get(18)),Integer.parseInt(records.get(i).get(19)),Integer.parseInt(records.get(i).get(20)),Double.parseDouble(records.get(i).get(21)),Integer.parseInt(records.get(i).get(22).trim()));
@@ -253,6 +259,10 @@ public class CsvParser {
             out.writeObject(lista);
             out.close();
             fileOut.close();
+            FileOutputStream fileOutMeta=new FileOutputStream("meta.ser");
+            ObjectOutputStream outMeta=new ObjectOutputStream(fileOutMeta);
+            outMeta.writeObject(this.metaData);
+            outMeta.close();
         } catch (IOException i) {
             i.printStackTrace();
         }

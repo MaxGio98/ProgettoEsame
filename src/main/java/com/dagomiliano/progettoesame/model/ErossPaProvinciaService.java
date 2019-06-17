@@ -56,7 +56,6 @@ public class ErossPaProvinciaService {
         return provincias;
     }
 
-
     public double media(String campo, List<ErossPaProvincia>lista) {
         double avg = 0;
         try {
@@ -82,17 +81,19 @@ public class ErossPaProvinciaService {
     }
 
     public Stats getStats(String field, List<ErossPaProvincia> lista) {
-        double sum = 0;
-        double avg = this.media(field,lista);
-        double devStd = 0;
-        double max;
-        double min;
-
         try {
             Method code = ErossPaProvincia.class.getMethod("get" + field.substring(0, 1).toUpperCase() + field.substring(1));
+            if(!((code.getReturnType()==Integer.TYPE)||(code.getReturnType()==Double.TYPE)))
+            {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Attenzione! Non posso effettuare questa operazione perchè "+field+" non è un dato di tipo Double o Int, ma di tipo "+code.getReturnType().getSimpleName()+"!");
+            }
+            double sum = 0;
+            double avg = this.media(field,lista);
+            double devStd = 0;
+            double max;
+            double min;
             max = ((Number) code.invoke(lista.get(0))).doubleValue();
             min = ((Number) code.invoke(lista.get(0))).doubleValue();
-
             for (ErossPaProvincia obj : lista) {
                 double temp = ((Number) code.invoke(obj)).doubleValue();
                 sum += temp;
@@ -101,13 +102,11 @@ public class ErossPaProvinciaService {
                 if (temp < min) min = temp;
             }
             devStd = Math.sqrt(devStd)/lista.size();
-
             Stats ret = new Stats(field, avg, devStd, max, min, sum, lista.size());
             return ret;
-
         } catch (NoSuchMethodException e)  {
             e.printStackTrace();
-            return null;
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Errore nei dati inseriti! "+field+" non esiste!");
         } catch (SecurityException e) {
             e.printStackTrace();
             return null;
@@ -117,7 +116,6 @@ public class ErossPaProvinciaService {
             e.printStackTrace();
             return null;
         }
-
         return null;
     }
 
@@ -159,7 +157,6 @@ public class ErossPaProvinciaService {
         return ret;
     }
 
-
     public Collection getMetadata() {
         List<MetaData> metaRet = new ArrayList<>();
         Field[] field = ErossPaProvincia.class.getDeclaredFields();
@@ -171,7 +168,6 @@ public class ErossPaProvinciaService {
             newMeta.setAlias(o.getName());
             newMeta.setSourceField(meta[i]);
             metaRet.add(newMeta);
-
             i += 1;
         }
         return metaRet;
