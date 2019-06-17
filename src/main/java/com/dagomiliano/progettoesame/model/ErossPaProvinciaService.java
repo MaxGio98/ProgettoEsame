@@ -2,22 +2,28 @@ package com.dagomiliano.progettoesame.model;
 
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import com.dagomiliano.progettoesame.utils.CsvParser;
+import com.dagomiliano.progettoesame.model.MetaData;
 
 
 @Component
 public class ErossPaProvinciaService {
 
+    private String[] meta;
     private static List<ErossPaProvincia> provincias = new ArrayList<>();
+
     {
         // Inizializza i dati
         CsvParser p = new CsvParser();
         p.checkSER();
         provincias = p.getList();
+        meta = p.getMetaData();
     }
 
     public static List<ErossPaProvincia> getDatas() {
@@ -151,6 +157,44 @@ public class ErossPaProvinciaService {
             }
         }
         return ret;
+    }
+
+//    public Collection getMetadata() {
+//        List<Object> metaRet = new ArrayList<>();
+//        Field[] field = ErossPaProvincia.class.getDeclaredFields();
+//        Object temp;
+//
+//        for(Field o : field) {
+//            MetaData newMeta = new MetaData();
+//            newMeta.setAlias(o.getName());
+//            newMeta.setType(o.getType().getSimpleName());
+//            metaRet.add(newMeta);
+//        }
+//
+//        for (int i = 0; i < this.meta.length; i++) {
+//            temp = metaRet.get(i);
+//            if(temp instanceof MetaData) {
+//                ((MetaData) temp).setSourceField(this.meta[i]);
+//            }
+//        }
+//        return metaRet;
+//    }
+
+    public Collection getMetadata() {
+        List<MetaData> metaRet = new ArrayList<>();
+        Field[] field = ErossPaProvincia.class.getDeclaredFields();
+        int i = 0;
+
+        for (Field o : field) {
+            MetaData newMeta = new MetaData();
+            newMeta.setType(o.getType().getSimpleName());
+            newMeta.setAlias(o.getName());
+            newMeta.setSourceField(meta[i]);
+            metaRet.add(newMeta);
+
+            i += 1;
+        }
+        return metaRet;
     }
 
    // END SERVICE

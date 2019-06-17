@@ -6,10 +6,9 @@ import com.dagomiliano.progettoesame.model.Stats;
 import com.dagomiliano.progettoesame.model.StringCount;
 import com.dagomiliano.progettoesame.utils.Filter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -41,15 +40,21 @@ public class ErossPaProvinciaController {
         return ePP.getStats(field);
     }
 
-    @GetMapping("count")
+    @GetMapping("/count")
     public List<StringCount> getCount() {
         return ePP.stringCounter();
     }
 
-    @GetMapping("floss/{field}/{filter}/{value}")
-    public List<ErossPaProvincia> filter(@PathVariable String field, @PathVariable String filter, @PathVariable int value) {
+    @GetMapping("/get/filter")
+    public List<ErossPaProvincia> filter(@RequestParam("field") String field, @RequestParam("filter") String filter, @RequestParam("value") int value) {
         Filter f = new Filter(filter);
         return f.filtering(field, value);
     }
+
+    @GetMapping("/get/metadata")
+    public Collection getMetadata() {
+        return ePP.getMetadata();
+    }
+
 
 }

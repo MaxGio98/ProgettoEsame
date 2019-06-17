@@ -29,24 +29,24 @@ public class CsvParser {
      * Stringa contenente il nome del file .zip da visitare
      */
     private String nomeZIP="EROSS_PA_PROVINCIA.zip";
-//    /**
-//     * Stringa contenente i metadati derivati dal csv
-//     */
-//    private String metaData;
-//    /**
-//     * Stringa contenente i dati derivati dal csv
-//     */
-//    private String data;
-//
-//    // END PARAMETERS
-//
-//    public String getData() {
-//        return this.data;
-//    }
-//
-//    public String getMetaData() {
-//        return this.metaData;
-//    }
+    /**
+     * Stringa contenente i metadati derivati dal csv
+     */
+    private String[] metaData;
+    /**
+     * Stringa contenente i dati derivati dal csv
+     */
+    private String data;
+
+    // END PARAMETERS
+
+    public String getData() {
+        return this.data;
+    }
+
+    public String[] getMetaData() {
+        return this.metaData;
+    }
 
     public List<ErossPaProvincia> getList() {
         return this.lista;
@@ -224,10 +224,13 @@ public class CsvParser {
      */
 
     public void parseCSV(List<List<String>> records) {
-//        String[] meta=new String[records.get(0).size()];
-//        for(int i=0;i<records.get(0).size()-1;i++)
-//        meta[i]=records.get(0).get(i);
+        String[] meta = new String[records.get(0).size()];
+        for(int i=0;i<records.get(0).size()-1;i++) {
+            meta[i] = records.get(0).get(i);
+        }
         records.remove(0);
+
+        this.metaData = meta;
 
         for(int i=0;i<records.size()-1;i++)
         {
