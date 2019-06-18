@@ -82,6 +82,10 @@ public class ErossPaProvinciaService {
 
     public Stats getStats(String field, List<ErossPaProvincia> lista) {
         try {
+            if(lista.isEmpty())
+            {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Nessun valore trovato per questo parametro!");
+            }
             Method code = ErossPaProvincia.class.getMethod("get" + field.substring(0, 1).toUpperCase() + field.substring(1));
             if(!((code.getReturnType()==Integer.TYPE)||(code.getReturnType()==Double.TYPE)))
             {

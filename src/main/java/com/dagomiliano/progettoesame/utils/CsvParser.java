@@ -30,24 +30,14 @@ public class CsvParser {
      */
     private String nomeZIP="EROSS_PA_PROVINCIA.zip";
     /**
-     * Stringa contenente i metadati derivati dal csv
+     * Vettore di stringhe contenente i metadati derivati dal csv
      */
     private String[] metaData;
-    /**
-     * Stringa contenente i dati derivati dal csv
-     */
-//    private String data;
-//
-//    // END PARAMETERS
-//
-//    public String getData() {
-//        return this.data;
-//    }
-
+    //get del vettore di stringhe "metaData"
     public String[] getMetaData() {
         return this.metaData;
     }
-
+    //get della lista di tipo ErossPaProvincia "lista"
     public List<ErossPaProvincia> getList() {
         return this.lista;
     }
@@ -60,7 +50,6 @@ public class CsvParser {
      */
     public void checkSER()
     {
-//        String data;
         File findSer=new File("lista.ser");
         File findMetaSer=new File("meta.ser");
         if(findSer.exists()&&findMetaSer.exists())
@@ -97,7 +86,7 @@ public class CsvParser {
     /**
      * Il metodo parseJSON si occupa del parsing del file json dall'url che lo contiene.
      * Il parsing del file è assegnato alla classe BasicJsonParser contenuta nelle librerie Spring.
-     * La visita della struttura dati ottenuta dal parsing è svolta attraverso i metodi della calsse Map.
+     * La visita della struttura dati ottenuta dal parsing è svolta attraverso i metodi della classe Map.
      *
      * @param Url   url contenente il file json da parsare
      * @return Stringa contenete l'url contenente il file .zip
