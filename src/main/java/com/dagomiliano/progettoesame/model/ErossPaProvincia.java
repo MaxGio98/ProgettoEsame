@@ -6,7 +6,7 @@ import java.io.Serializable;
  *  Classe modellante dei dati contenente gli attributi presenti nel file .csv
  *
  *  Il file proposto contiene dati inerenti l'utilizzo di software con licenza FLOSS nelle province
- *  dell' Emilia Romagno nel periodo dicembre 2007 - marzo 2008.
+ *  dell' Emilia Romagna nel periodo dicembre 2007 - marzo 2008.
  */
 
 public class ErossPaProvincia implements Serializable {

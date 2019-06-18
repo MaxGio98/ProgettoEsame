@@ -10,6 +10,17 @@ public class Stats {
     private double sum;
     private int count;
 
+    /**
+     * Costruttore classe
+     *
+     * @param field
+     * @param avg
+     * @param devStd
+     * @param max
+     * @param min
+     * @param sum
+     * @param count
+     */
     public Stats(String field, double avg, double devStd, double max, double min, double sum, int count) {
         this.field = field;
         this.avg = avg;
@@ -20,11 +31,7 @@ public class Stats {
         this.count = count;
     }
 
-    public Stats(String elem)
-    {
-        this.field=elem;
-    }
-
+    //Getters and Setters
     public String getField() {
         return field;
     }
