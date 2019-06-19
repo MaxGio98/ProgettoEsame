@@ -158,7 +158,6 @@ public class Filter {
             List<ErossPaProvincia> list = new ArrayList<>();
             for (ErossPaProvincia obj : ErossPaProvinciaService.getDatas()) {
                 //se, richiamando il get del campo di nostro interessse, il valore è uguale al valore di riferimento, allora questo campo verrà aggiunto alla lista filtrata
-
                 if (((Number) code.invoke(obj)).doubleValue() == param) list.add(obj);
             }
             return list;

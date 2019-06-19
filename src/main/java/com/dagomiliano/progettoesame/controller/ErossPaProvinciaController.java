@@ -29,7 +29,7 @@ public class ErossPaProvinciaController {
 
     @GetMapping("/all")
     public List<ErossPaProvincia> searchAll() {
-        return ePP.getAll();
+        return ePP.getDatas();
     }
 
     @GetMapping("stats/{field}")

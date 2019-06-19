@@ -6,12 +6,14 @@ public class MetaData {
     private String sourceField;
     private String type;
 
-    public MetaData() {}
+
+    //public MetaData() {}
 
     public String getAlias() {
         return alias;
     }
 
+    //getters and setters
     public void setAlias(String alias) {
         this.alias = alias;
     }

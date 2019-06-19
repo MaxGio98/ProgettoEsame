@@ -215,7 +215,6 @@ public class CsvParser {
                     {
                         //% viene rimosso
                         records.get(i).set(j,records.get(i).get(j).replace("%",""));
-
                     }
                     //se la stringa presenta una virgola
                     if(records.get(i).get(j).contains(","))
@@ -255,7 +254,7 @@ public class CsvParser {
     public void parseCSV(List<List<String>> records) {
         //dichiarazione vettore di stringhe meta, di dimensione massima pari al numero di colonne della lista records
         String[] meta = new String[records.get(0).size()];
-        for(int i=0;i<records.get(0).size()-1;i++) {
+        for(int i=0;i<records.get(0).size();i++) {
             //copia dei dati nel vettore di stringhe, elemento per elemento
             meta[i] = records.get(0).get(i);
         }
@@ -263,7 +262,9 @@ public class CsvParser {
         records.remove(0);
         //copia in metaData del contenuto di meta
         this.metaData = meta;
-        //copia della lista di liste di stringhe records in una lista di tipo ErossPaProvincia, elemento per elemento
+        /*copia della lista di liste di stringhe records in una lista di tipo ErossPaProvincia, elemento per elemento.
+        * L'ultimo record non viene importato poichè nel file .csv vi è inserito un record di sintesi (regionale)
+        * e, dopo aver discusso della presenza di questo record con il prof. Mancini, si è deciso di escluderlo. */
         for(int i=0;i<records.size()-1;i++)
         {
                 ErossPaProvincia ePP=new ErossPaProvincia(Integer.parseInt(records.get(i).get(0)),records.get(i).get(1),Integer.parseInt(records.get(i).get(2)),Integer.parseInt(records.get(i).get(3)),Integer.parseInt(records.get(i).get(4)),Integer.parseInt(records.get(i).get(5)),Integer.parseInt(records.get(i).get(6)),Integer.parseInt(records.get(i).get(7)),Integer.parseInt(records.get(i).get(8)),Integer.parseInt(records.get(i).get(9)),Integer.parseInt(records.get(i).get(10)),Integer.parseInt(records.get(i).get(11)),Integer.parseInt(records.get(i).get(12)),Integer.parseInt(records.get(i).get(13)),Integer.parseInt(records.get(i).get(14)),Integer.parseInt(records.get(i).get(15)),Integer.parseInt(records.get(i).get(16)),Integer.parseInt(records.get(i).get(17)),Integer.parseInt(records.get(i).get(18)),Integer.parseInt(records.get(i).get(19)),Integer.parseInt(records.get(i).get(20)),Double.parseDouble(records.get(i).get(21)),Integer.parseInt(records.get(i).get(22).trim()));
