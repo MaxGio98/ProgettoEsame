@@ -163,23 +163,6 @@ public class ErossPaProvinciaService {
         int counter;
         boolean flag = true;
         while(flag) {
-            //se si è al primo ciclo si procede all'inserimento del primo elemento in lista
-//            if (ret.size() == 0) {
-//
-//                StringCount n = new StringCount(this.provincias.get(0).getTerritorio());
-//                for (int i = 1; i < provincias.size(); i++) {
-//                    if (n.getField().equals(this.provincias.get(i).getTerritorio())) {
-//                        counter = counter + 1;
-//                    }
-//                }
-//                counter=1;
-//                n.setCount(counter);
-//                ret.add(n);
-//                check.add(n.getField());
-//            } else {
-                /*controllando se il campo è già stato usato per il conteggio, incremento il valore count
-                  per quante volte esso sia presente in lista. Se il campo è già stato usato, significa che il
-                  conteggio è stato effettuato, quindi procedo con il for passando al campo successivo*/
                 for (int i = 0; i < this.provincias.size(); i++) {
                     if (!(check.contains(this.provincias.get(i).getTerritorio()))) {
                         StringCount n = new StringCount(this.provincias.get(i).getTerritorio());
