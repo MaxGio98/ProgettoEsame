@@ -1,10 +1,18 @@
 package com.dagomiliano.progettoesame.model;
 
+/**
+ * Classe modellante per il conteggio di stringhe StringCount
+ */
 public class StringCount {
 
     private String field;
     private int count;
 
+    /**
+     * Costruttore della classe
+     *
+     * @param field
+     */
     public StringCount(String field) {
         this.field = field;
     }

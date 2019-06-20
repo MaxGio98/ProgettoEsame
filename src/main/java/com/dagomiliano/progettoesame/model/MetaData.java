@@ -1,5 +1,8 @@
 package com.dagomiliano.progettoesame.model;
 
+/**
+ * Classe modellante per i metadata
+ */
 public class MetaData {
 
     private String alias;
@@ -7,7 +10,7 @@ public class MetaData {
     private String type;
 
 
-    //public MetaData() {}
+    //Getters and setters
 
     public String getAlias() {
         return alias;

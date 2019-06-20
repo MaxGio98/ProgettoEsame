@@ -1,5 +1,8 @@
 package com.dagomiliano.progettoesame.model;
 
+/**
+ * Classe modellante per le statistiche
+ */
 public class Stats {
 
     private String field;
