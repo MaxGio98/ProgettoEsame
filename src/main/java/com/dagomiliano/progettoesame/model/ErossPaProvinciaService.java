@@ -65,23 +65,6 @@ public class ErossPaProvinciaService {
     }
 
     /**
-     * Metodo che consente di ottenere, fornendo al metodo come parametro le iniziali della provincia, tutte le informazioni
-     * riguardanti quella provincia
-     *
-     * @param prov contenente la sigla della provincia
-     * @return oggetto contenente le informazioni desiderate
-     */
-    public ErossPaProvincia getDatoByProvincia(String prov) {
-        String provTemp = "terr.prov. di " + prov;
-        for (ErossPaProvincia obj : provincias) {
-            if (obj.getTerritorio().equals(provTemp)){
-                return obj;
-            }
-        }
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Errore nei dati inseriti");
-    }
-
-    /**
      * Metodo che consente di ottenere tutti i dati statistici richiesti su un determinato campo di interesse
      *
      * @param field contiene il nome del campo di ricerca specificato
@@ -179,7 +162,6 @@ public class ErossPaProvinciaService {
                 }
                 flag = false;
             }
-        //}
         return ret;
     }
 

@@ -12,6 +12,8 @@ import java.util.List;
 @RestController
 public class ErossPaProvinciaController {
 
+    private String field;
+
     @Autowired
     private ErossPaProvinciaService ePP;
 
@@ -21,17 +23,12 @@ public class ErossPaProvinciaController {
         return ePP.getDatoById(id);
     }
 
-    @GetMapping("/territorio/{territorio}")
-    public ErossPaProvincia searchProvincia(@PathVariable String territorio)
-    {
-        return ePP.getDatoByProvincia(territorio);
-    }
-
     @GetMapping("/all")
     public List<ErossPaProvincia> searchAll() {
         return ePP.getDatas();
     }
 
+    //getmapping con metodi in overload
     @GetMapping("stats/{field}")
     public Stats getStats(@PathVariable String field) {
         return ePP.getStats(field,ePP.getDatas());
@@ -45,21 +42,25 @@ public class ErossPaProvinciaController {
         return ePP.stringCounter();
     }
 
-    @GetMapping("/get/filter")
-    public List<ErossPaProvincia> filter(@RequestParam("field") String field, @RequestParam("filter") String filter, @RequestParam("value") int value) {
-        Filter f = new Filter(filter);
-        return f.filtering(field, value);
-    }
-
-    @GetMapping("/get/filter/stats")
-    public Stats statsfilter(@RequestParam("field") String field, @RequestParam("filter") String filter, @RequestParam("value") int value)
-    {
-        List<ErossPaProvincia> lista= this.filter(field, filter, value);
-        return getStats(field,lista);
-    }
-
     @GetMapping("/get/metadata")
     public Collection getMetadata() {
         return ePP.getMetadata();
     }
+
+    @PostMapping("/post/filter/")
+    public List<ErossPaProvincia> filterpost(@RequestBody String body)
+    {
+        Filter f=new Filter();
+        List l=f.parseBody(body);
+        this.field=l.get(0).toString();
+        return f.filtering1(this.field,l.get(1).toString(),l.get(2));
+    }
+
+    @PostMapping("/post/filter/stats")
+    public Stats filterpoststats(@RequestBody String body)
+    {
+       List<ErossPaProvincia>lista=this.filterpost(body);
+       return getStats(this.field,lista);
+    }
+
 }
