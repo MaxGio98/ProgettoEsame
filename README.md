@@ -20,5 +20,5 @@ L’applicazione è sviluppata in java con l’utilizzo del framework Spring.</p
 <a href="./resources/uml/img/class.jpg"><strong>Class diagram</strong><img src="./resources/uml/img/class.jpg"><br>
 </a><a href="./resources/uml/img/sequence.jpg"><strong>Sequence diagram</strong><img src="./resources/uml/img/sequence.jpg"></a></p>
 <h2 id="documentazione">Documentazione</h2>
-<p>la documentazione generata con javadoc è disponibile al <a href="./doc/index-files/index-1.html"><strong>link</strong></a>.</p>
+<p>la documentazione generata con javadoc è disponibile al <a href="./doc/com/dagomiliano/progettoesame"><strong>link</strong></a>.</p>
 
