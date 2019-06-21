@@ -1,7 +1,6 @@
 package com.dagomiliano.progettoesame.model;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -9,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import com.dagomiliano.progettoesame.utils.CsvParser;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 /**
@@ -17,7 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
  * {@link com.dagomiliano.progettoesame.utils.CsvParser}).
  */
 
-@Component
+@Service
 public class ErossPaProvinciaService {
     //dichiarazione della variabile meta di tipo array di stringhe
     private static String[] meta;
