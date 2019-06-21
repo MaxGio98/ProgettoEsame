@@ -16,7 +16,7 @@ L’applicazione è sviluppata in java con l’utilizzo del framework Spring.</p
 <li><a href="./src/main/java/com/dagomiliano/progettoesame/utils"><strong>Utils</strong></a></li>
 </ul>
 <h2 id="diagrammi-uml">Diagrammi UML</h2>
-<p><a href="./resources/uml/img/useCase.jpg"><img src="./resources/uml/img/useCase.jpg"> <strong>Use case diagram</strong></a><br>
-<a href="./resources/uml/img/class.jpg"><img src="./resources/uml/img/class.jpg"> <strong>Class diagram</strong><br>
-</a><a href="./resources/uml/img/sequence.jpg"><img src="./resources/uml/img/sequence.jpg"><strong>Sequence diagram</strong></a></p>
+<p><a href="./resources/uml/img/useCase.jpg"><strong>Use case diagram</strong><img src="./resources/uml/img/useCase.jpg"></a><br>
+<a href="./resources/uml/img/class.jpg"><strong>Class diagram</strong><img src="./resources/uml/img/class.jpg"><br>
+</a><a href="./resources/uml/img/sequence.jpg"><strong>Sequence diagram</strong><img src="./resources/uml/img/sequence.jpg"></a></p>
 
