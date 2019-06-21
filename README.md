@@ -4,9 +4,14 @@
 ---
 
 <h1 id="progetto-programmazione-ad-oggetti">Progetto programmazione ad oggetti</h1>
-<p>Progetto per il corso di programmazione ad oggetti del secondo anno di ingegneria informatica e dell’automazione (Università politecnica delle Marche).</p>
+<p>Progetto per il corso di programmazione ad oggetti del secondo anno di ingegneria informatica e dell’ automazione (Università politecnica delle Marche).</p>
+<p>Autori :</p>
+<ul>
+<li>Giovagnola Massimiliano</li>
+<li>D’ Agostino Lorenzo</li>
+</ul>
 <h2 id="descrizione">Descrizione</h2>
-<p>L’ applicazione sviluppata consente la gestione di dati formato Json a partire da un file csv. L’ applicazione si occupa di parsare i dati dal file di partenza e, tramite opportune Api rest Get/Post, restituisce in formato Json statistiche ottenute dai dati di partenza o comunque una visualizzazione di dati di interesse.<br>
+<p>L’ applicazione sviluppata consente la gestione di dati formato Json a partire da un file csv. In particolare si occupa di parsare i dati dal file di partenza e, tramite opportune Api rest Get/Post, restituisce in formato Json statistiche ottenute dai dati di partenza o comunque una visualizzazione dei dati di interesse.<br>
 L’applicazione è sviluppata in java con l’utilizzo del framework Spring.</p>
 <h2 id="composizione">Composizione</h2>
 <p>L’ applicazione segue il pattern MVC caratteristico del framework utilizzato (Spring), di cui abbiamo implementato il Model ed il Controller. E’ presente anche un package Utils dove costruiamo le classi esterne al pattern.</p>
