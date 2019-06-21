@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Classe controller del pattern MVC che gestische le richieste tramite api get/post.
+ * Al suo interno è presente un oggetto di {@link ErossPaProvinciaService}
+ */
+
 @RestController
 public class ErossPaProvinciaController {
 

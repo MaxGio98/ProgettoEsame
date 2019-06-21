@@ -12,9 +12,9 @@ import com.dagomiliano.progettoesame.utils.CsvParser;
 import org.springframework.web.server.ResponseStatusException;
 
 /**
- * La classe ErossPaProvinciaService contiene tutti i metodi che faranno ritornare i dati filtrati
+ * La classe ErossPaProvinciaService contiene tutti i metodi che faranno ritornare i dati filtrati (dal {@link com.dagomiliano.progettoesame.utils.Filter})
  * all'utente e contiene le istruzioni per l'avvio corretto del programma (verrà richiamato il metodo checkSER di
- * CsvParser)
+ * {@link com.dagomiliano.progettoesame.utils.CsvParser}).
  */
 
 @Component
@@ -69,7 +69,7 @@ public class ErossPaProvinciaService {
      *
      * @param field contiene il nome del campo di ricerca specificato
      * @param lista contiene la lista intera o filtrata
-     * @return variabile di tipo Stats contenente il risultato delle statistiche
+     * @return variabile di tipo {@link Stats} contenente il risultato delle statistiche
      */
     public Stats getStats(String field, List<ErossPaProvincia> lista) {
         try {
@@ -136,7 +136,7 @@ public class ErossPaProvinciaService {
      * Metodo che consente di ottenere come risultato il conteggio di quante volte sono presenti delle province
      * nella lista ottenuta.
      *
-     * @return una lista contenente i nomi delle province e quante volte si ripetono all'interno di essa.
+     * @return una lista contenente i nomi delle province e quante volte si ripetono all'interno di essa ({@link StringCount}).
      */
     public List<StringCount> stringCounter() {
         List<StringCount> ret = new ArrayList<>();
@@ -166,9 +166,9 @@ public class ErossPaProvinciaService {
     }
 
     /**
-     * Metodo che consente di ottenere in risultato per ogni campo l'alias, il sourceField e il tipo
+     * Metodo che consente di ottenere in risultato per ogni campo l'alias, il sourceField e il tipo.
      *
-     * @return collection che contiene tutte le informazioni riguardanti i metadati.
+     * @return collection che contiene tutte le informazioni riguardanti i metadati modellizzati da {@link MetaData}.
      */
     public Collection getMetadata() {
         int i=0;
