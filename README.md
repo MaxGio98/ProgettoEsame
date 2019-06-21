@@ -23,7 +23,7 @@
 <li><strong>Sintassi</strong>:&nbsp;<span style="background-color: #ffff00;"><code>/id/{id}</code></span></li>
 <li><strong>Tipo di richiesta</strong>: GET</li>
 <li><strong>Descrizione</strong>: Visualizza tutte le informazioni riguardanti un record che possiede l'id specificato dall'utente.</li>
-<li><strong>Esempio d'uso</strong>:<code> /id/99&nbsp;</code></li>
+<li><strong>Esempio d'uso</strong>: <code>/id/99&nbsp;</code></li>
 </ul>
 </li>
 </ul>
@@ -111,8 +111,8 @@
 <h3>&nbsp;</h3>
 <h2>Sintassi body</h2>
 <ol>
-<li><code>{"{field}" : {"{filter}" : value}</code><br /><br /><strong>Esempi</strong>:<br /><br /><code>{"idTerritorio" : {"$not" : 36}<br />{"idTerritorio" : {"$lt" : 35}<br />{"spesaMediaSoftwarePerAddetto" : {"$gt" : 220.2}<br /><br /></code></li>
-<li><code>{"{field}" : {"$in" : [value1,value2,...]}</code><br /><br /><strong>Esempi</strong>:<br /><br /><code>{"idTerritorio" : {"$in" : [99,33,57,150]}</code></li>
+<li><code>{"{field}" : {"{filter}" : value} </code><br /><br /><strong>Esempi</strong>:<br /><br /><code>{"idTerritorio" : {"$not" : 36} <br />{"idTerritorio" : {"$lt" : 35} <br />{"spesaMediaSoftwarePerAddetto" : {"$gt" : 220.2} <br /><br /></code></li>
+<li><code>{"{field}" : {"$in" : [value1,value2,...]} </code><br /><br /><strong>Esempi</strong>:<br /><br /><code>{"idTerritorio" : {"$in" : [99,33,57,150]} </code></li>
 </ol>
 <p>&nbsp;</p>
 <h2 id="diagrammi-uml">Diagrammi UML</h2>
