@@ -77,7 +77,6 @@ public class ErossPaProvinciaController {
     public Collection getMetadata() {
         return ePP.getMetadata();
     }
-
     private String field;
 
     /**
