@@ -111,7 +111,7 @@
 <h3>&nbsp;</h3>
 <h2>Sintassi body</h2>
 <ol>
-<li><code>{"{field}" : {"{filter}" : value} </code><br /><br /><strong>Esempi</strong>:<br /><br /><code>{"idTerritorio" : {"$not" : 36} </code><code><br />{"idTerritorio" : {"$lt" : 35} </code><br /><code>{"spesaMediaSoftwarePerAddetto" : {"$gt" : 220.2} </code><br /><br /></li>
+<li><code>{"{field}" : {"{filter}" : value} </code><br /><br /><strong>Esempi</strong>:<br /><br /><code>{"idTerritorio" : {"$not" : 36} </code><br /><code>{"idTerritorio" : {"$lt" : 35} </code><br /><code>{"spesaMediaSoftwarePerAddetto" : {"$gt" : 220.2} </code><br /><br /></li>
 <li><code>{"{field}" : {"$in" : [value1,value2,...]} </code><br /><br /><strong>Esempi</strong>:<br /><br /><code>{"idTerritorio" : {"$in" : [99,33,57,150]} </code></li>
 </ol>
 <p>&nbsp;</p>
